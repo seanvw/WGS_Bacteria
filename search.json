@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "example_1.html",
+    "href": "example_1.html",
+    "title": "Example #1",
+    "section": "",
+    "text": "Eg 1\nSome text"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "WGS Bacteria",
+    "section": "",
+    "text": "This is a Quarto website about WGS with Bacteria\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About me"
+  }
+]
