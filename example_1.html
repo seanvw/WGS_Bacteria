@@ -229,35 +229,33 @@ mkdir: QC_RAW_READS: File exists</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use clean install of conda on machine in private space </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">-V</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmed_reads</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="va">read1</span><span class="op">=</span>data/P7741_R1.fastq.gz</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="va">read2</span><span class="op">=</span>data/P7741_R2.fastq.gz</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardPaired</span><span class="op">=</span>trimmed_reads/P7741_R1.fastq.gz    </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R1.fastq.gz</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReversePaired</span><span class="op">=</span>trimmed_reads/P7741_R2.fastq.gz</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReverseUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R2.fastq.gz</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">threads</span><span class="op">=</span>4</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># trimmomatic PE -threads $threads $read1 $read2 \</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputForwardPaired</span> <span class="va">$OutputForwardUnpaired</span> <span class="dt">\</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputReversePaired</span> <span class="va">$OutputReverseUnpaired</span> <span class="dt">\</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> QC_TRIMMED_READS</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc trimmed_reads/* -o QC_TRIMMED_READS</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> QC_TRIMMED_READS</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmed_reads</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="va">read1</span><span class="op">=</span>data/P7741_R1.fastq.gz</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="va">read2</span><span class="op">=</span>data/P7741_R2.fastq.gz</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardPaired</span><span class="op">=</span>trimmed_reads/P7741_R1.fastq.gz    </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R1.fastq.gz</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReversePaired</span><span class="op">=</span>trimmed_reads/P7741_R2.fastq.gz</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReverseUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R2.fastq.gz</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">threads</span><span class="op">=</span>4</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># trimmomatic PE -threads $threads $read1 $read2 \</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputForwardPaired</span> <span class="va">$OutputForwardUnpaired</span> <span class="dt">\</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputReversePaired</span> <span class="va">$OutputReverseUnpaired</span> <span class="dt">\</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> QC_TRIMMED_READS</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc trimmed_reads/* -o QC_TRIMMED_READS</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> QC_TRIMMED_READS</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>conda 24.1.2
-mkdir: trimmed_reads: File exists
-zsh:17: permission denied: trimmed_reads/P7741_R1.fastq.gz
+<pre><code>mkdir: trimmed_reads: File exists
+zsh:16: permission denied: trimmed_reads/P7741_R1.fastq.gz
 mkdir: QC_TRIMMED_READS: File exists
 P7741_R1_fastqc.html
 P7741_R1_fastqc.zip
@@ -326,56 +324,57 @@ warnings.log</code></pre>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Runs but takes quite some time on my mini-server</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To clean re-run, delete dirs,</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># polishing_process</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># polished_assembly</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run script</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ./polish.sh</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> polishing_process</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> polished_assembly</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run script</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ./polish.sh</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> polishing_process</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>mapping1.sorted.bam
-mapping1.sorted.bam.bai
-mapping2.sorted.bam
-mapping2.sorted.bam.bai
-mapping3.sorted.bam
-mapping3.sorted.bam.bai
-mapping4.sorted.bam
-mapping4.sorted.bam.bai
-pilon_stage1.changes
-pilon_stage1.fasta
-pilon_stage1.fasta.amb
-pilon_stage1.fasta.ann
-pilon_stage1.fasta.bwt
-pilon_stage1.fasta.pac
-pilon_stage1.fasta.sa
-pilon_stage2.changes
-pilon_stage2.fasta
-pilon_stage2.fasta.amb
-pilon_stage2.fasta.ann
-pilon_stage2.fasta.bwt
-pilon_stage2.fasta.pac
-pilon_stage2.fasta.sa
-pilon_stage3.changes
-pilon_stage3.fasta
-pilon_stage3.fasta.amb
-pilon_stage3.fasta.ann
-pilon_stage3.fasta.bwt
-pilon_stage3.fasta.pac
-pilon_stage3.fasta.sa
-pilon_stage4.changes
-pilon_stage4.fasta
-raw_assembly.fasta
-raw_assembly.fasta.amb
-raw_assembly.fasta.ann
-raw_assembly.fasta.bwt
-raw_assembly.fasta.pac
-raw_assembly.fasta.sa
-stage1.pilon
-stage2.pilon
-stage3.pilon
-stage4.pilon</code></pre>
+<pre><code>
+polishing_process
+polishing_process/pilon_stage4.changes
+polishing_process/pilon_stage1.fasta.ann
+polishing_process/pilon_stage3.fasta.amb
+polishing_process/pilon_stage3.fasta.bwt
+polishing_process/stage1.pilon
+polishing_process/pilon_stage1.fasta
+polishing_process/pilon_stage3.fasta
+polishing_process/raw_assembly.fasta.ann
+polishing_process/mapping3.sorted.bam
+polishing_process/stage3.pilon
+polishing_process/pilon_stage4.fasta
+polishing_process/mapping4.sorted.bam
+polishing_process/pilon_stage2.fasta.amb
+polishing_process/stage4.pilon
+polishing_process/raw_assembly.fasta
+polishing_process/pilon_stage2.fasta.bwt
+polishing_process/raw_assembly.fasta.pac
+polishing_process/raw_assembly.fasta.sa
+polishing_process/pilon_stage2.fasta
+polishing_process/pilon_stage1.fasta.pac
+polishing_process/stage2.pilon
+polishing_process/mapping1.sorted.bam
+polishing_process/pilon_stage1.fasta.sa
+polishing_process/pilon_stage3.fasta.ann
+polishing_process/pilon_stage1.fasta.amb
+polishing_process/mapping1.sorted.bam.bai
+polishing_process/mapping2.sorted.bam
+polishing_process/pilon_stage1.fasta.bwt
+polishing_process/pilon_stage3.changes
+polishing_process/raw_assembly.fasta.bwt
+polishing_process/pilon_stage2.fasta.pac
+polishing_process/pilon_stage2.changes
+polishing_process/raw_assembly.fasta.amb
+polishing_process/pilon_stage2.fasta.ann
+polishing_process/pilon_stage3.fasta.sa
+polishing_process/pilon_stage2.fasta.sa
+polishing_process/mapping2.sorted.bam.bai
+polishing_process/pilon_stage3.fasta.pac
+polishing_process/mapping3.sorted.bam.bai
+polishing_process/mapping4.sorted.bam.bai
+polishing_process/pilon_stage1.changes</code></pre>
 </div>
 </div>
 </section>
@@ -384,7 +383,7 @@ stage4.pilon</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">-V</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># just the quast software</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate just_quast</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -408,8 +407,7 @@ stage4.pilon</code></pre>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>conda 24.1.2
-aligned_stats
+<pre><code>aligned_stats
 basic_stats
 contigs_reports
 genome_stats
