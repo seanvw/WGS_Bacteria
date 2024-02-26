@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -119,7 +153,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#eg-1" id="toc-eg-1" class="nav-link active" data-scroll-target="#eg-1">Eg 1</a></li>
+  <li><a href="#enter-conda-env-data-download-qc-reports" id="toc-enter-conda-env-data-download-qc-reports" class="nav-link active" data-scroll-target="#enter-conda-env-data-download-qc-reports">Enter Conda env, data download, QC reports</a></li>
+  <li><a href="#trim-and-qc-reports" id="toc-trim-and-qc-reports" class="nav-link" data-scroll-target="#trim-and-qc-reports">Trim and QC reports</a></li>
+  <li><a href="#assembly" id="toc-assembly" class="nav-link" data-scroll-target="#assembly">Assembly</a></li>
+  <li><a href="#polishing" id="toc-polishing" class="nav-link" data-scroll-target="#polishing">Polishing</a></li>
+  <li><a href="#qc-of-assembly" id="toc-qc-of-assembly" class="nav-link" data-scroll-target="#qc-of-assembly">QC of Assembly</a></li>
+  <li><a href="#strange-bug" id="toc-strange-bug" class="nav-link" data-scroll-target="#strange-bug">Strange bug</a></li>
   </ul>
 </nav>
     </div>
@@ -145,9 +184,256 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="eg-1" class="level1">
-<h1>Eg 1</h1>
-<p>Some text</p>
+<p>This example uses just the Illumina data (<a href="https://www.ebi.ac.uk/ena/browser/view/ERR3335404" class="uri">https://www.ebi.ac.uk/ena/browser/view/ERR3335404</a>) generated for the study “<strong>Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate</strong>” (<a href="https://www.ebi.ac.uk/ena/browser/view/PRJEB30628" class="uri">https://www.ebi.ac.uk/ena/browser/view/PRJEB30628</a>). Mycobacterium ulcerans is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.</p>
+<p>The reference genome paper is “<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3554023/">Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii</a>” and it’s sequence <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_020133" class="uri">https://www.ncbi.nlm.nih.gov/nuccore/NC_020133</a>. Mycobacterium liflandii 128FXT, complete sequence NCBI Reference Sequence: NC_020133.1</p>
+<p>This work is based on the excellent presentation and analayis as instructed by vincentappiah <a href="https://www.youtube.com/watch?v=S_sRo_85jhs&amp;list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd">video</a>. The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability.</p>
+<section id="enter-conda-env-data-download-qc-reports" class="level2">
+<h2 class="anchored" data-anchor-id="enter-conda-env-data-download-qc-reports">Enter Conda env, data download, QC reports</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use clean install of conda on machine in private space </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">-V</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># download data to data folder if not done already</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x download_data.sh</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ./download_data.sh</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastqc</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> QC_RAW_READS</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc data/*.fastq.gz -o QC_RAW_READS</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>conda 24.1.2
+# conda environments:
+#
+base                  *  /Users/sw/anaconda3
+bacterial-genomics-tutorial-sw1     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw1
+bacterial-genomics-tutorial-sw2     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw2
+bacterial-genomics-tutorial-sw3     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw3
+bacterial-genomics-tutorial-sw4     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw4
+bacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw5
+bacterial-genomics-tutorial-sw7     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7
+example                  /Users/sw/anaconda3/envs/example
+just_quast               /Users/sw/anaconda3/envs/just_quast
+
+mkdir: QC_RAW_READS: File exists</code></pre>
+</div>
+</div>
+<p>Results files are QC html reports</p>
+<p><a href="./QC_RAW_READS/P7741_R1_fastqc.html">./QC_RAW_READS/P7741_R1_fastqc.html</a></p>
+<p><a href="./QC_RAW_READS/P7741_R1_fastqc.html">./QC_RAW_READS/P7741_R2_fastqc.html</a></p>
+</section>
+<section id="trim-and-qc-reports" class="level2">
+<h2 class="anchored" data-anchor-id="trim-and-qc-reports">Trim and QC reports</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use clean install of conda on machine in private space </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">-V</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmed_reads</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="va">read1</span><span class="op">=</span>data/P7741_R1.fastq.gz</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="va">read2</span><span class="op">=</span>data/P7741_R2.fastq.gz</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardPaired</span><span class="op">=</span>trimmed_reads/P7741_R1.fastq.gz    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R1.fastq.gz</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReversePaired</span><span class="op">=</span>trimmed_reads/P7741_R2.fastq.gz</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReverseUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R2.fastq.gz</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">threads</span><span class="op">=</span>4</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># trimmomatic PE -threads $threads $read1 $read2 \</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputForwardPaired</span> <span class="va">$OutputForwardUnpaired</span> <span class="dt">\</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputReversePaired</span> <span class="va">$OutputReverseUnpaired</span> <span class="dt">\</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> QC_TRIMMED_READS</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc trimmed_reads/* -o QC_TRIMMED_READS</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> QC_TRIMMED_READS</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>conda 24.1.2
+mkdir: trimmed_reads: File exists
+zsh:17: permission denied: trimmed_reads/P7741_R1.fastq.gz
+mkdir: QC_TRIMMED_READS: File exists
+P7741_R1_fastqc.html
+P7741_R1_fastqc.zip
+P7741_R2_fastqc.html
+P7741_R2_fastqc.zip
+P7741_unpaired_R1_fastqc.html
+P7741_unpaired_R1_fastqc.zip
+P7741_unpaired_R2_fastqc.html
+P7741_unpaired_R2_fastqc.zip</code></pre>
+</div>
+</div>
+<p>Results files are QC html reports. Vincent’s results are different around 16:29. In video he says sickle trimming was used but the code uses trimmomatic.</p>
+<p><a href="./QC_TRIMMED_READS/P7741_R1_fastqc.html">./QC_TRIMMED_READS/P7741_R1_fastqc.html</a></p>
+<p><a href="./QC_TRIMMED_READS/P7741_R1_fastqc.html">./QC_TRIMMED_READS/P7741_R2_fastqc.html</a></p>
+<p><a href="./QC_TRIMMED_READS/P7741_unpaired_R1_fastqc.html">./QC_TRIMMED_READS/P7741_unpaired_R1_fastqc.html</a></p>
+<p><a href="./QC_TRIMMED_READS/P7741_unpaired_R2_fastqc.html">./QC_TRIMMED_READS/P7741_unpaired_R2_fastqc.html</a></p>
+</section>
+<section id="assembly" class="level2">
+<h2 class="anchored" data-anchor-id="assembly">Assembly</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real problems setting up spades with conda - notes on Set Up page</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution was to get the spades Mac binaries</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># It runs but takes quite some time on my mini-server</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Therefore delete directory</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># P7741_SPADES_OUT</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># and re-run if needed</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ~/SPAdes-3.15.5-Darwin/bin/spades.py --careful -o P7741_SPADES_OUT -1 trimmed_reads/P7741_R1.fastq.gz -2 trimmed_reads/P7741_R2.fastq.gz</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> P7741_SPADES_OUT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>K21
+K33
+K55
+K77
+assembly_graph.fastg
+assembly_graph_after_simplification.gfa
+assembly_graph_with_scaffolds.gfa
+before_rr.fasta
+contigs.fasta
+contigs.paths
+corrected
+dataset.info
+input_dataset.yaml
+misc
+mismatch_corrector
+params.txt
+pipeline_state
+run_spades.sh
+run_spades.yaml
+scaffolds.fasta
+scaffolds.paths
+spades.log
+tmp
+warnings.log</code></pre>
+</div>
+</div>
+</section>
+<section id="polishing" class="level2">
+<h2 class="anchored" data-anchor-id="polishing">Polishing</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use standard script to do 4 rounds (not guaranteed to be optimal) of polishing</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Runs but takes quite some time on my mini-server</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To clean re-run, delete dirs,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># polishing_process</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># polished_assembly</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run script</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ./polish.sh</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> polishing_process</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> polished_assembly</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mapping1.sorted.bam
+mapping1.sorted.bam.bai
+mapping2.sorted.bam
+mapping2.sorted.bam.bai
+mapping3.sorted.bam
+mapping3.sorted.bam.bai
+mapping4.sorted.bam
+mapping4.sorted.bam.bai
+pilon_stage1.changes
+pilon_stage1.fasta
+pilon_stage1.fasta.amb
+pilon_stage1.fasta.ann
+pilon_stage1.fasta.bwt
+pilon_stage1.fasta.pac
+pilon_stage1.fasta.sa
+pilon_stage2.changes
+pilon_stage2.fasta
+pilon_stage2.fasta.amb
+pilon_stage2.fasta.ann
+pilon_stage2.fasta.bwt
+pilon_stage2.fasta.pac
+pilon_stage2.fasta.sa
+pilon_stage3.changes
+pilon_stage3.fasta
+pilon_stage3.fasta.amb
+pilon_stage3.fasta.ann
+pilon_stage3.fasta.bwt
+pilon_stage3.fasta.pac
+pilon_stage3.fasta.sa
+pilon_stage4.changes
+pilon_stage4.fasta
+raw_assembly.fasta
+raw_assembly.fasta.amb
+raw_assembly.fasta.ann
+raw_assembly.fasta.bwt
+raw_assembly.fasta.pac
+raw_assembly.fasta.sa
+stage1.pilon
+stage2.pilon
+stage3.pilon
+stage4.pilon</code></pre>
+</div>
+</div>
+</section>
+<section id="qc-of-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="qc-of-assembly">QC of Assembly</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">-V</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># just the quast software</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate just_quast</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># genomes dir taked from vincents repo</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># quast throws an error with default script</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># -t 1 solves </span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># other potential issue may exist as the install of quast was not completed...</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># see SetUp page</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run again</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># mkdir QC_ASSEMBLY</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># quast.py -t 1 -o QC_ASSEMBLY -R genomes/Liflandii.fasta P7741_SPADES_OUT/scaffolds.fasta P7741.polished.fasta</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Results notes</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># N50 quality didn't change with polishing, GC% didn't change,</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Slight change in misassemblies </span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Link in the report.html</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># This workflow uses just Illumiuna data</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> QC_ASSEMBLY</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>conda 24.1.2
+aligned_stats
+basic_stats
+contigs_reports
+genome_stats
+icarus.html
+icarus_viewers
+quast.log
+report.html
+report.pdf
+report.tex
+report.tsv
+report.txt
+transposed_report.tex
+transposed_report.tsv
+transposed_report.txt</code></pre>
+</div>
+</div>
+</section>
+<section id="strange-bug" class="level2">
+<h2 class="anchored" data-anchor-id="strange-bug">Strange bug</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With Quarto, the strange bug means that if an {r} executable block is included</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then the preceding {bash} blocks are executed, otherwise not!</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simply include this and all is executed as desired.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>

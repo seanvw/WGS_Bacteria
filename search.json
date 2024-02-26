@@ -4,21 +4,42 @@
     "href": "setup.html",
     "title": "Set Up Notes",
     "section": "",
-    "text": "Notes\n\n# at the time of writing the stable release is 1.3.450\n# Quarto beta install \nquarto -v \n\n1.4.489\n\n\n\n# use clean install of conda on machine in private space \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda -V\n# e.g. add a channel \n# conda config --add channels bioconda \nconda config --show channels \n# bacterial-genomics-tutorial-sw5 is the most complete\n# quast causes issues with the full environment  \nconda env list\n\nconda 24.1.2\nchannels:\n  - bioconda\n  - conda-forge\n  - defaults\n# conda environments:\n#\nbase                  *  /Users/sw/anaconda3\nbacterial-genomics-tutorial-sw1     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw1\nbacterial-genomics-tutorial-sw2     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw2\nbacterial-genomics-tutorial-sw3     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw3\nbacterial-genomics-tutorial-sw4     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw4\nbacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw5\nexample                  /Users/sw/anaconda3/envs/example"
+    "text": "# Quarto install \nquarto -v \n\n1.4.489"
   },
   {
-    "objectID": "setup.html#versions",
-    "href": "setup.html#versions",
+    "objectID": "setup.html#quarto",
+    "href": "setup.html#quarto",
     "title": "Set Up Notes",
     "section": "",
-    "text": "Notes\n\n# at the time of writing the stable release is 1.3.450\n# Quarto beta install \nquarto -v \n\n1.4.489\n\n\n\n# use clean install of conda on machine in private space \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda -V\n# e.g. add a channel \n# conda config --add channels bioconda \nconda config --show channels \n# bacterial-genomics-tutorial-sw5 is the most complete\n# quast causes issues with the full environment  \nconda env list\n\nconda 24.1.2\nchannels:\n  - bioconda\n  - conda-forge\n  - defaults\n# conda environments:\n#\nbase                  *  /Users/sw/anaconda3\nbacterial-genomics-tutorial-sw1     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw1\nbacterial-genomics-tutorial-sw2     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw2\nbacterial-genomics-tutorial-sw3     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw3\nbacterial-genomics-tutorial-sw4     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw4\nbacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw5\nexample                  /Users/sw/anaconda3/envs/example"
+    "text": "# Quarto install \nquarto -v \n\n1.4.489"
   },
   {
-    "objectID": "setup.html#conda-commands",
-    "href": "setup.html#conda-commands",
+    "objectID": "setup.html#conda",
+    "href": "setup.html#conda",
     "title": "Set Up Notes",
-    "section": "Conda commands",
-    "text": "Conda commands\nSome examples for future reference and documentation of the limited environment.\nquast causes issues\ne.g. create an env\n\n# conda create --name example\n# conda install jupyterlab\n# conda activate example\n# conda list \\| grep jupyter\n\n# run for example jupyterlab\n\n# jupyter-lab\n\n# conda deactivate\n\n# conda env create -f environment.yaml\n\n# Found conflicts! Looking for incompatible packages.\n\n# now a series of reduced env for testing and debugging\n\n# conda env create -f environment_sw1.yaml\n\n# conda env create -f environment_sw2.yaml\n\n# conda env create -f environment_sw4.yaml\n\n# conda env create -f environment_sw3.yaml\n\n# conda env create -f environment_sw5.yaml\n\n# Adding 'quast' causes issues\n\n# ... Solving environment: failed ..\n\n# conda env create -f environment_sw6.yaml\n\n# to remove an environment\n\n# conda remove --name bacterial-genomics-tutorial-sw5-sw1 --all"
+    "section": "Conda",
+    "text": "Conda\n\nSummary:\n\nA single environment was not possible\n\nquast causes issues (folder envs_yaml/ and files used to help resolve issues)\n\nbacterial-genomics-tutorial-sw7 is the most complete and is used\nA second enviroment, just_quast is also needed\nA binary install of SPAdes was needed\npilon download\n\n\n# use clean install of conda on machine in private space \nsource ~/anaconda3/etc/profile.d/conda.sh\nconda -V\n# e.g. add a channel \n# conda config --add channels bioconda \nconda config --show channels \n\nconda env list\n\nconda 24.1.2\nchannels:\n  - conda-forge\n  - bioconda\n  - defaults\n# conda environments:\n#\nbase                  *  /Users/sw/anaconda3\nbacterial-genomics-tutorial-sw1     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw1\nbacterial-genomics-tutorial-sw2     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw2\nbacterial-genomics-tutorial-sw3     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw3\nbacterial-genomics-tutorial-sw4     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw4\nbacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw5\nbacterial-genomics-tutorial-sw7     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7\nexample                  /Users/sw/anaconda3/envs/example\njust_quast               /Users/sw/anaconda3/envs/just_quast"
+  },
+  {
+    "objectID": "setup.html#main-conda-env-spades",
+    "href": "setup.html#main-conda-env-spades",
+    "title": "Set Up Notes",
+    "section": "Main conda env / SPAdes",
+    "text": "Main conda env / SPAdes\nReference commands and setup notes\n# This code is not executed in page rendering\n# e.g. create an env\nconda create --name example\nconda activate example\nconda install jupyterlab\nconda list | grep jupyter\n# run for example jupyterlab\njupyter-lab\nconda deactivate\n\n# envs\nconda env create -f environment.yaml\n# Found conflicts! Looking for incompatible packages.\n\n# now a series of reduced env for testing and debugging\nconda env create -f envs_yaml/environment_sw1.yaml\nconda env create -f envs_yaml/environment_sw2.yaml\nconda env create -f envs_yaml/environment_sw4.yaml\nconda env create -f envs_yaml/environment_sw3.yaml\nconda env create -f envs_yaml/environment_sw5.yaml\n\n# Adding 'quast' causes issues\n# ... Solving environment: failed with ..\nconda env create -f envs_yaml/environment_sw6.yaml\n\n# Now a spades issue, \n# https://github.com/ablab/spades/issues/8732\n# see url above\n# try specify a version\n# first search\nconda search spades\n# i specify the latest version as 3.15.2\nconda env create -f envs_yaml/environment_sw7.yaml\n\n# and note,\n#############################################################################################\n#                                                                                           #\n#   Note: SPAdes installed through bioconda on MacOS may be somewhat slower than the SPAdes #\n#   binaries distributed by the authors at                                                  #\n#                                                                                           #\n#   http://cab.spbu.ru/files/release3.15.2/SPAdes-3.15.2-Darwin.tar.gz\n#                                                                                           #\n#   due to unavailability of parallel libstdc++ for the Clang compiler used by bioconda on  #\n#   MacOS; see https://github.com/ablab/spades/issues/194#issuecomment-523175204            #\n#                                                                                           #\n#############################################################################################\n\n# binary is not available\n# also, the whole domain content http://cab.spbu.ru/ is unavailable\n\n# in any case, spades 3.15.2 doesn't work\n\n# same error,\nin construct_mapping\n    if not isinstance(key, collections.Hashable):\n AttributeError: module 'collections' has no attribute 'Hashable'\n\n# The fix is included into the latest SPAdes 3.15.4 release\n\n# conda just has up to 3.15.2 !!!\n\n# try \nconda config --add channels defaults\nconda config --add channels bioconda\nconda config --add channels conda-forge\nconda config --set channel_priority strict\n# commands change the order to\nchannels:\n  - conda-forge\n  - bioconda\n  - defaults\nconda search spades \n# 3.15.2 is latest, channels inc bioconda\nconda config --show channels \n# and URLs \nconda config --show default_channels\n# but not for bioconda\n\n# it's a mystery why versions &gt; 3.15.2 can not be seen by\nconda search spades \n# clearly they exist\n# https://bioconda.github.io/recipes/spades/README.html#package-spades\n\nconda update spades\n# All requested packages already installed.\nconda list | grep spades\n# spades                    3.15.2               he641558_0    bioconda\n\n# seems like I would need to setup mamba to get a working spades?\nhttps://bioconda.github.io/recipes/spades/README.html\n\n# get binaries from github, a viable option?\nhttps://github.com/ablab/spades?tab=readme-ov-file#sec2.2\n# installed in home (~)\nwget https://github.com/ablab/spades/releases/download/v3.15.5/SPAdes-3.15.5-Darwin.tar.gz\ntar -zxf SPAdes-3.15.5-Darwin.tar.gz\ncd SPAdes-3.15.5-Darwin/bin/\n\n# This seemed to work\n\n### additional commands \n# to remove an environment e.g.\nconda remove --name bacterial-genomics-tutorial-sw1-sw1 --all\n\nconda info"
+  },
+  {
+    "objectID": "setup.html#quast-only-environment",
+    "href": "setup.html#quast-only-environment",
+    "title": "Set Up Notes",
+    "section": "Quast only environment",
+    "text": "Quast only environment\nconda create --name just_quast\nconda activate just_quast\nconda install quast\n# has lots of dependancies and gives final messages\n\nDownloading and Extracting Packages:\n                                                                                                              \nPreparing transaction: done                                                                   \nVerifying transaction: done                                                                              \nExecuting transaction: | The default QUAST package does not include:                                                                                                                              \n* GRIDSS (needed for structural variants detection)                                                             \n* SILVA 16S rRNA database (needed for reference genome detection in metagenomic datasets)\n* BUSCO tools and databases (needed for searching BUSCO genes) -- works in Linux only!                                                                                                            \nTo be able to use those, please run                                                                                                                                                               \n    quast-download-gridss                                                                            \n    quast-download-silva\n    \n    \n    quast-download-busco   \n    --------------------\n\nwith   Downloading BUSCO database...\nDownloading bacteria database (file: bacteria.tar.gz)...\n\nERROR! Failed downloading bacteria database (url: https://busco-archive.ezlab.org/v3/datasets/bacteria_odb9.tar.gz), QUAST functionality will be limited! Exception caught: HTTP Error 404: Not Found\n\nYou can try to download the file manually, place it in /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco/bacteria.tar.gz and restart QUAST\n\nWARNING: Failed to download bacteria database from https://busco-archive.ezlab.org/v3/datasets/bacteria_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco\n  Downloading BUSCO database...\n\nDownloading eukaryota database (file: eukaryota.tar.gz)...\n\nERROR! Failed downloading eukaryota database (url: https://busco-archive.ezlab.org/v3/datasets/eukaryota_odb9.tar.gz), QUAST functionality will be limited! Exception caught: HTTP Error 404: Not Found\n\nYou can try to download the file manually, place it in /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco/eukaryota.tar.gz and restart QUAST\n\nWARNING: Failed to download eukaryota database from https://busco-archive.ezlab.org/v3/datasets/eukaryota_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco\n  Downloading BUSCO database...\n\nDownloading fungi database (file: fungi.tar.gz)...\n\nERROR! Failed downloading fungi database (url: https://busco-archive.ezlab.org/v3/datasets/fungi_odb9.tar.gz), QUAST functionality will be limited! Exception caught: HTTP Error 404: Not Found\n\nYou can try to download the file manually, place it in /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco/fungi.tar.gz and restart QUAST\n\nWARNING: Failed to download fungi database from https://busco-archive.ezlab.org/v3/datasets/fungi_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco"
+  },
+  {
+    "objectID": "setup.html#pilon",
+    "href": "setup.html#pilon",
+    "title": "Set Up Notes",
+    "section": "Pilon",
+    "text": "Pilon\n\n# need pilon\nmkdir apps\ncd apps\nif [ -f pilon-1.24.jar ]; then\n    echo 'Pilon jar file exists.'\nelse\n    echo 'Getting pilon jar file '\n    wget https://github.com/broadinstitute/pilon/releases/download/v1.24/pilon-1.24.jar\nfi\necho 'Dir list'\nls\ncd ..\n\n# link the latest version to pilon.jar\n\nmkdir: apps: File exists\nPilon jar file exists.\nDir list\npilon-1.23.jar\npilon-1.24.jar\npilon.jar"
   },
   {
     "objectID": "setup.html#strange-bug",
@@ -39,20 +60,62 @@
     "href": "index.html",
     "title": "WGS Bacteria",
     "section": "",
-    "text": "This is a Quarto website about WGS with Bacteria as instructed by vincentappiah video\nUsing Anaconda (conda and miniconda)"
+    "text": "Some minimal text for the moment"
   },
   {
-    "objectID": "index.html#test",
-    "href": "index.html#test",
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
     "title": "WGS Bacteria",
     "section": "",
-    "text": "This is a Quarto website about WGS with Bacteria as instructed by vincentappiah video\nUsing Anaconda (conda and miniconda)"
+    "text": "Some minimal text for the moment"
   },
   {
     "objectID": "example_1.html",
     "href": "example_1.html",
     "title": "Example #1",
     "section": "",
-    "text": "Eg 1\nSome text"
+    "text": "This example uses just the Illumina data (https://www.ebi.ac.uk/ena/browser/view/ERR3335404) generated for the study “Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate” (https://www.ebi.ac.uk/ena/browser/view/PRJEB30628). Mycobacterium ulcerans is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.\nThe reference genome paper is “Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii” and it’s sequence https://www.ncbi.nlm.nih.gov/nuccore/NC_020133. Mycobacterium liflandii 128FXT, complete sequence NCBI Reference Sequence: NC_020133.1\nThis work is based on the excellent presentation and analayis as instructed by vincentappiah video. The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability."
+  },
+  {
+    "objectID": "example_1.html#enter-conda-env-data-download-qc-reports",
+    "href": "example_1.html#enter-conda-env-data-download-qc-reports",
+    "title": "Example #1",
+    "section": "Enter Conda env, data download, QC reports",
+    "text": "Enter Conda env, data download, QC reports\n\n# use clean install of conda on machine in private space \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda -V\nconda env list\nconda activate bacterial-genomics-tutorial-sw7\n# download data to data folder if not done already\nchmod +x download_data.sh\n# uncomment to re-run\n# ./download_data.sh\n# run fastqc\nmkdir QC_RAW_READS\n# fastqc data/*.fastq.gz -o QC_RAW_READS\nconda deactivate\n\nconda 24.1.2\n# conda environments:\n#\nbase                  *  /Users/sw/anaconda3\nbacterial-genomics-tutorial-sw1     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw1\nbacterial-genomics-tutorial-sw2     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw2\nbacterial-genomics-tutorial-sw3     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw3\nbacterial-genomics-tutorial-sw4     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw4\nbacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw5\nbacterial-genomics-tutorial-sw7     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7\nexample                  /Users/sw/anaconda3/envs/example\njust_quast               /Users/sw/anaconda3/envs/just_quast\n\nmkdir: QC_RAW_READS: File exists\n\n\nResults files are QC html reports\n./QC_RAW_READS/P7741_R1_fastqc.html\n./QC_RAW_READS/P7741_R2_fastqc.html"
+  },
+  {
+    "objectID": "example_1.html#trim-and-qc-reports",
+    "href": "example_1.html#trim-and-qc-reports",
+    "title": "Example #1",
+    "section": "Trim and QC reports",
+    "text": "Trim and QC reports\n\n# use clean install of conda on machine in private space \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda -V\nconda activate bacterial-genomics-tutorial-sw7\n\nmkdir trimmed_reads\nread1=data/P7741_R1.fastq.gz\nread2=data/P7741_R2.fastq.gz\nOutputForwardPaired=trimmed_reads/P7741_R1.fastq.gz    \nOutputForwardUnpaired=trimmed_reads/P7741_unpaired_R1.fastq.gz\nOutputReversePaired=trimmed_reads/P7741_R2.fastq.gz\nOutputReverseUnpaired=trimmed_reads/P7741_unpaired_R2.fastq.gz\nthreads=4\n\n# uncomment to run\n# trimmomatic PE -threads $threads $read1 $read2 \\\n$OutputForwardPaired $OutputForwardUnpaired \\\n$OutputReversePaired $OutputReverseUnpaired \\\nILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25\n\nmkdir QC_TRIMMED_READS\n# uncomment to run\n# fastqc trimmed_reads/* -o QC_TRIMMED_READS\n\nls -1 QC_TRIMMED_READS\n\nconda deactivate\n\nconda 24.1.2\nmkdir: trimmed_reads: File exists\nzsh:17: permission denied: trimmed_reads/P7741_R1.fastq.gz\nmkdir: QC_TRIMMED_READS: File exists\nP7741_R1_fastqc.html\nP7741_R1_fastqc.zip\nP7741_R2_fastqc.html\nP7741_R2_fastqc.zip\nP7741_unpaired_R1_fastqc.html\nP7741_unpaired_R1_fastqc.zip\nP7741_unpaired_R2_fastqc.html\nP7741_unpaired_R2_fastqc.zip\n\n\nResults files are QC html reports. Vincent’s results are different around 16:29. In video he says sickle trimming was used but the code uses trimmomatic.\n./QC_TRIMMED_READS/P7741_R1_fastqc.html\n./QC_TRIMMED_READS/P7741_R2_fastqc.html\n./QC_TRIMMED_READS/P7741_unpaired_R1_fastqc.html\n./QC_TRIMMED_READS/P7741_unpaired_R2_fastqc.html"
+  },
+  {
+    "objectID": "example_1.html#assembly",
+    "href": "example_1.html#assembly",
+    "title": "Example #1",
+    "section": "Assembly",
+    "text": "Assembly\n\n# Real problems setting up spades with conda - notes on Set Up page\n# Solution was to get the spades Mac binaries\n#\n# It runs but takes quite some time on my mini-server\n# Therefore delete directory\n# P7741_SPADES_OUT\n# and re-run if needed\n# ~/SPAdes-3.15.5-Darwin/bin/spades.py --careful -o P7741_SPADES_OUT -1 trimmed_reads/P7741_R1.fastq.gz -2 trimmed_reads/P7741_R2.fastq.gz\n\nls -1 P7741_SPADES_OUT\n\nK21\nK33\nK55\nK77\nassembly_graph.fastg\nassembly_graph_after_simplification.gfa\nassembly_graph_with_scaffolds.gfa\nbefore_rr.fasta\ncontigs.fasta\ncontigs.paths\ncorrected\ndataset.info\ninput_dataset.yaml\nmisc\nmismatch_corrector\nparams.txt\npipeline_state\nrun_spades.sh\nrun_spades.yaml\nscaffolds.fasta\nscaffolds.paths\nspades.log\ntmp\nwarnings.log"
+  },
+  {
+    "objectID": "example_1.html#polishing",
+    "href": "example_1.html#polishing",
+    "title": "Example #1",
+    "section": "Polishing",
+    "text": "Polishing\n\n# conda \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda activate bacterial-genomics-tutorial-sw7\n# Use standard script to do 4 rounds (not guaranteed to be optimal) of polishing\n# Runs but takes quite some time on my mini-server\n# To clean re-run, delete dirs,\n# polishing_process\n# polished_assembly\n# re-run script\n# ./polish.sh\n\nls -1 polishing_process\nls -1 polished_assembly\n\nconda deactivate\n\nmapping1.sorted.bam\nmapping1.sorted.bam.bai\nmapping2.sorted.bam\nmapping2.sorted.bam.bai\nmapping3.sorted.bam\nmapping3.sorted.bam.bai\nmapping4.sorted.bam\nmapping4.sorted.bam.bai\npilon_stage1.changes\npilon_stage1.fasta\npilon_stage1.fasta.amb\npilon_stage1.fasta.ann\npilon_stage1.fasta.bwt\npilon_stage1.fasta.pac\npilon_stage1.fasta.sa\npilon_stage2.changes\npilon_stage2.fasta\npilon_stage2.fasta.amb\npilon_stage2.fasta.ann\npilon_stage2.fasta.bwt\npilon_stage2.fasta.pac\npilon_stage2.fasta.sa\npilon_stage3.changes\npilon_stage3.fasta\npilon_stage3.fasta.amb\npilon_stage3.fasta.ann\npilon_stage3.fasta.bwt\npilon_stage3.fasta.pac\npilon_stage3.fasta.sa\npilon_stage4.changes\npilon_stage4.fasta\nraw_assembly.fasta\nraw_assembly.fasta.amb\nraw_assembly.fasta.ann\nraw_assembly.fasta.bwt\nraw_assembly.fasta.pac\nraw_assembly.fasta.sa\nstage1.pilon\nstage2.pilon\nstage3.pilon\nstage4.pilon"
+  },
+  {
+    "objectID": "example_1.html#qc-of-assembly",
+    "href": "example_1.html#qc-of-assembly",
+    "title": "Example #1",
+    "section": "QC of Assembly",
+    "text": "QC of Assembly\n\n# conda\nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda -V\n# just the quast software\nconda activate just_quast\n\n# genomes dir taked from vincents repo\n# quast throws an error with default script\n# -t 1 solves \n# other potential issue may exist as the install of quast was not completed...\n# see SetUp page\n\n# uncomment to run again\n# mkdir QC_ASSEMBLY\n# quast.py -t 1 -o QC_ASSEMBLY -R genomes/Liflandii.fasta P7741_SPADES_OUT/scaffolds.fasta P7741.polished.fasta\n\n# Results notes\n# N50 quality didn't change with polishing, GC% didn't change,\n# Slight change in misassemblies \n# Link in the report.html\n# This workflow uses just Illumiuna data\n\nls -1 QC_ASSEMBLY\n\nconda deactivate\n\nconda 24.1.2\naligned_stats\nbasic_stats\ncontigs_reports\ngenome_stats\nicarus.html\nicarus_viewers\nquast.log\nreport.html\nreport.pdf\nreport.tex\nreport.tsv\nreport.txt\ntransposed_report.tex\ntransposed_report.tsv\ntransposed_report.txt"
+  },
+  {
+    "objectID": "example_1.html#strange-bug",
+    "href": "example_1.html#strange-bug",
+    "title": "Example #1",
+    "section": "Strange bug",
+    "text": "Strange bug\n\n# With Quarto, the strange bug means that if an {r} executable block is included\n# then the preceding {bash} blocks are executed, otherwise not!\n# Simply include this and all is executed as desired."
   }
 ]
