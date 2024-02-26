@@ -487,25 +487,25 @@ draft genome sequence extracted</code></pre>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[20:03:03] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[20:03:03] Checking mlst dependencies:
-[20:03:03] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[20:03:03] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[20:03:03] Found blastn: 2.15.0+ (002015)
-[20:03:03] Excluding 3 schemes: vcholerae_2 abaumannii ecoli
-[20:03:05] Found exact allele match mycobacteria_2.S7-10
-[20:03:05] Found exact allele match mycobacteria_2.L16-450
-[20:03:05] Found exact allele match mycobacteria_2.S12-394
-[20:03:05] Found exact allele match mycobacteria_2.L19-11
-[20:03:05] Found exact allele match mycobacteria_2.S19-13
-[20:03:05] Found exact allele match mycobacteria_2.L35-10
-[20:03:05] Found exact allele match mycobacteria_2.S14Z-10
-[20:03:05] The manual is now quite extensive; read it at https://github.com/tseemann/mlst
-[20:03:05] Done.
+<pre><code>[20:09:36] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[20:09:36] Checking mlst dependencies:
+[20:09:36] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[20:09:36] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[20:09:36] Found blastn: 2.15.0+ (002015)
+[20:09:36] Excluding 3 schemes: ecoli abaumannii vcholerae_2
+[20:09:38] Found exact allele match mycobacteria_2.S7-10
+[20:09:38] Found exact allele match mycobacteria_2.L16-450
+[20:09:38] Found exact allele match mycobacteria_2.S12-394
+[20:09:38] Found exact allele match mycobacteria_2.L19-11
+[20:09:38] Found exact allele match mycobacteria_2.S19-13
+[20:09:38] Found exact allele match mycobacteria_2.L35-10
+[20:09:38] Found exact allele match mycobacteria_2.S14Z-10
+[20:09:38] The manual is now quite extensive; read it at https://github.com/tseemann/mlst
+[20:09:38] Done.
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
 Found 1 genes in P7741.reordered.fasta
-Tip: have a suggestion for abricate? Tell me at https://github.com/tseemann/abricate/issues
+Tip: did you know? abricate was named after 'A'nti 'B'acterial 'R'esistiance
 Done.
 #FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
 P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
@@ -523,11 +523,112 @@ P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ====
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">get_pseudo.pl</span> P7741_annotation/P7741.faa <span class="kw">|</span> <span class="fu">tee</span> P7741_annotation/P7741.pseudo.txt</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">./get_pseudo.pl</span> P7741_annotation/P7741.faa <span class="op">&gt;</span> P7741_annotation/P7741.pseudo.txt</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-100</span>  P7741_annotation/P7741.pseudo.txt</span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>zsh:9: command not found: get_pseudo.pl</code></pre>
+<pre><code>Found 4805 genes.
+Found 141 potential psuedo-genes
+P7741_00021 &amp; P7741_00022 =&gt; HTH-type transcriptional activator TipA
+P7741_00062 &amp; P7741_00063 =&gt; putative protein
+P7741_00063 &amp; P7741_00064 =&gt; putative protein
+P7741_00161 &amp; P7741_00162 =&gt; ESX-1 secretion-associated protein EspK
+P7741_00272 &amp; P7741_00273 =&gt; putative protein
+P7741_00273 &amp; P7741_00274 =&gt; putative protein
+P7741_00276 &amp; P7741_00277 =&gt; putative monooxygenase
+P7741_00279 &amp; P7741_00280 =&gt; Putative citrate synthase 2
+P7741_00281 &amp; P7741_00282 =&gt; Sphingomyelinase
+P7741_00293 &amp; P7741_00294 =&gt; putative protein
+P7741_00294 &amp; P7741_00295 =&gt; putative protein
+P7741_00326 &amp; P7741_00327 =&gt; putative protein
+P7741_00374 &amp; P7741_00375 =&gt; Creatinase
+P7741_00383 &amp; P7741_00384 =&gt; S-sulfocysteine synthase
+P7741_00386 &amp; P7741_00387 =&gt; Multicopper oxidase MmcO
+P7741_00393 &amp; P7741_00394 =&gt; 2,3-dihydroxyphenylpropionate/2,3-dihydroxicinnamic acid 1,2-dioxygenase
+P7741_00416 &amp; P7741_00417 =&gt; Methylmalonyl-CoA mutase
+P7741_00502 &amp; P7741_00503 =&gt; Isoniazid-induced protein IniC
+P7741_00512 &amp; P7741_00513 =&gt; L-asparagine permease 2
+P7741_00543 &amp; P7741_00544 =&gt; Putrescine importer PuuP
+P7741_00583 &amp; P7741_00584 =&gt; putative protein
+P7741_00746 &amp; P7741_00747 =&gt; Putative S-adenosyl-L-methionine-dependent methyltransferase
+P7741_00747 &amp; P7741_00748 =&gt; Putative S-adenosyl-L-methionine-dependent methyltransferase
+P7741_00758 &amp; P7741_00759 =&gt; Putative S-adenosyl-L-methionine-dependent methyltransferase
+P7741_00790 &amp; P7741_00791 =&gt; putative cutinase cut3
+P7741_00836 &amp; P7741_00837 =&gt; Cholesterol oxidase
+P7741_00856 &amp; P7741_00857 =&gt; Putative diacyglycerol O-acyltransferase
+P7741_00858 &amp; P7741_00859 =&gt; Error-prone DNA polymerase
+P7741_01064 &amp; P7741_01065 =&gt; Putative diacyglycerol O-acyltransferase
+P7741_01075 &amp; P7741_01076 =&gt; Geranial dehydrogenase
+P7741_01127 &amp; P7741_01128 =&gt; Nitrate/nitrite transporter NarK
+P7741_01183 &amp; P7741_01184 =&gt; Flavin-dependent tryptophan halogenase RebH
+P7741_01266 &amp; P7741_01267 =&gt; putative protein
+P7741_01271 &amp; P7741_01272 =&gt; Putative diacyglycerol O-acyltransferase
+P7741_01343 &amp; P7741_01344 =&gt; putative cobalt/nickel-exporting P-type ATPase
+P7741_01345 &amp; P7741_01346 =&gt; Putative thioredoxin 2
+P7741_01400 &amp; P7741_01401 =&gt; Putative acyltransferase plsB1
+P7741_01418 &amp; P7741_01419 =&gt; putative protein
+P7741_01508 &amp; P7741_01509 =&gt; Phenolphthiocerol synthesis polyketide synthase type I Pks15/1
+P7741_01509 &amp; P7741_01510 =&gt; Phenolphthiocerol synthesis polyketide synthase type I Pks15/1
+P7741_01560 &amp; P7741_01561 =&gt; Carboxylic acid reductase
+P7741_01581 &amp; P7741_01582 =&gt; putative protein
+P7741_01582 &amp; P7741_01583 =&gt; putative protein
+P7741_01590 &amp; P7741_01591 =&gt; putative protein
+P7741_01591 &amp; P7741_01592 =&gt; putative protein
+P7741_01639 &amp; P7741_01640 =&gt; Carboxylesterase NlhH
+P7741_01663 &amp; P7741_01664 =&gt; Putative diacyglycerol O-acyltransferase
+P7741_01668 &amp; P7741_01669 =&gt; Esterase PE16
+P7741_01690 &amp; P7741_01691 =&gt; Glucose-6-phosphate 1-dehydrogenase 2
+P7741_01828 &amp; P7741_01829 =&gt; putative transport protein MmpL1
+P7741_01894 &amp; P7741_01895 =&gt; putative protein
+P7741_02017 &amp; P7741_02018 =&gt; putative zinc protease
+P7741_02029 &amp; P7741_02030 =&gt; putative protein
+P7741_02030 &amp; P7741_02031 =&gt; putative protein
+P7741_02087 &amp; P7741_02088 =&gt; putative protein
+P7741_02088 &amp; P7741_02089 =&gt; putative protein
+P7741_02117 &amp; P7741_02118 =&gt; putative PPE family protein PPE47/PPE48
+P7741_02129 &amp; P7741_02130 =&gt; Diacetylchitobiose uptake system ATP-binding protein MsiK
+P7741_02151 &amp; P7741_02152 =&gt; Bifunctional apolipoprotein N-acyltransferase/polyprenol monophosphomannose synthase
+P7741_02176 &amp; P7741_02177 =&gt; putative protein
+P7741_02179 &amp; P7741_02180 =&gt; Beta-lactamase
+P7741_02180 &amp; P7741_02181 =&gt; Beta-lactamase
+P7741_02274 &amp; P7741_02275 =&gt; putative PPE family protein PPE51
+P7741_02323 &amp; P7741_02324 =&gt; putative PPE family protein PPE40
+P7741_02338 &amp; P7741_02339 =&gt; Putative flavin-containing monoamine oxidase AofH
+P7741_02372 &amp; P7741_02373 =&gt; ATP-dependent DNA helicase Rep
+P7741_02388 &amp; P7741_02389 =&gt; Acid phosphatase
+P7741_02390 &amp; P7741_02391 =&gt; Putative isochorismate synthase MenF
+P7741_02413 &amp; P7741_02414 =&gt; NADPH-dependent stearoyl-CoA 9-desaturase
+P7741_02439 &amp; P7741_02440 =&gt; Alkane 1-monooxygenase
+P7741_02442 &amp; P7741_02443 =&gt; putative protein
+P7741_02443 &amp; P7741_02444 =&gt; putative protein
+P7741_02484 &amp; P7741_02485 =&gt; D-alanine--D-alanyl carrier protein ligase
+P7741_02501 &amp; P7741_02502 =&gt; ATP-dependent RNA helicase DeaD
+P7741_02601 &amp; P7741_02602 =&gt; Alkane 1-monooxygenase
+P7741_02604 &amp; P7741_02605 =&gt; Glycogen operon protein GlgX 
+P7741_02643 &amp; P7741_02644 =&gt; Phospholipase C 1
+P7741_02692 &amp; P7741_02693 =&gt; putative protein
+P7741_02775 &amp; P7741_02776 =&gt; putative zinc-binding alcohol dehydrogenase
+P7741_02778 &amp; P7741_02779 =&gt; putative protein
+P7741_02820 &amp; P7741_02821 =&gt; Lon protease
+P7741_02821 &amp; P7741_02822 =&gt; Lon protease
+P7741_02828 &amp; P7741_02829 =&gt; putative CoA-transferase
+P7741_02829 &amp; P7741_02830 =&gt; putative CoA-transferase
+P7741_02886 &amp; P7741_02887 =&gt; putative PPE family protein PPE32
+P7741_02910 &amp; P7741_02911 =&gt; 4-alpha-glucanotransferase
+P7741_02947 &amp; P7741_02948 =&gt; Putative cytochrome P450 143
+P7741_03010 &amp; P7741_03011 =&gt; Serine/threonine-protein kinase PknK
+P7741_03016 &amp; P7741_03017 =&gt; Putative succinate-semialdehyde dehydrogenase [NADP(+)] 2
+P7741_03088 &amp; P7741_03089 =&gt; Universal stress protein
+P7741_03129 &amp; P7741_03130 =&gt; 1-deoxy-D-xylulose-5-phosphate synthase
+P7741_03136 &amp; P7741_03137 =&gt; putative transporter
+P7741_03138 &amp; P7741_03139 =&gt; Fluoroquinolones export permease protein
+P7741_03140 &amp; P7741_03141 =&gt; Fluoroquinolones export ATP-binding protein
+P7741_03144 &amp; P7741_03145 =&gt; Trk system potassium uptake protein TrkA
+P7741_03169 &amp; P7741_03170 =&gt; putative protein
+P7741_03177 &amp; P7741_03178 =&gt; putative membrane protein
+P7741_03178 &amp; P7741_03179 =&gt; putative membrane protein
+P7741_03183 &amp; P7741_03184 =&gt; tRNA dimethylallyltransferase
+P7741_03224 &amp; P7741_03225 =&gt; Acyl-CoA dehydrogenase FadE34</code></pre>
 </div>
 </div>
 </section>
