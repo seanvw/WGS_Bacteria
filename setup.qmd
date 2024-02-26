@@ -1,0 +1,237 @@
+---
+title: "Set Up Notes"
+---
+
+## Quarto
+
+```{bash}
+# Quarto install 
+quarto -v 
+```
+
+## Conda
+
+### Summary:
+
+-   A single environment was not possible
+
+    -   quast causes issues (folder envs_yaml/ and files used to help resolve issues)
+
+-   bacterial-genomics-tutorial-sw7 is the most complete and is used
+
+-   A second enviroment, just_quast is also needed
+
+-   A binary install of SPAdes was needed
+
+-   pilon download
+
+```{bash}
+# use clean install of conda on machine in private space 
+source ~/anaconda3/etc/profile.d/conda.sh
+conda -V
+# e.g. add a channel 
+# conda config --add channels bioconda 
+conda config --show channels 
+
+conda env list
+```
+
+## Main conda env / SPAdes
+
+Reference commands and setup notes
+
+``` bash
+# This code is not executed in page rendering
+# e.g. create an env
+conda create --name example
+conda activate example
+conda install jupyterlab
+conda list | grep jupyter
+# run for example jupyterlab
+jupyter-lab
+conda deactivate
+
+# envs
+conda env create -f environment.yaml
+# Found conflicts! Looking for incompatible packages.
+
+# now a series of reduced env for testing and debugging
+conda env create -f envs_yaml/environment_sw1.yaml
+conda env create -f envs_yaml/environment_sw2.yaml
+conda env create -f envs_yaml/environment_sw4.yaml
+conda env create -f envs_yaml/environment_sw3.yaml
+conda env create -f envs_yaml/environment_sw5.yaml
+
+# Adding 'quast' causes issues
+# ... Solving environment: failed with ..
+conda env create -f envs_yaml/environment_sw6.yaml
+
+# Now a spades issue, 
+# https://github.com/ablab/spades/issues/8732
+# see url above
+# try specify a version
+# first search
+conda search spades
+# i specify the latest version as 3.15.2
+conda env create -f envs_yaml/environment_sw7.yaml
+
+# and note,
+#############################################################################################
+#                                                                                           #
+#   Note: SPAdes installed through bioconda on MacOS may be somewhat slower than the SPAdes #
+#   binaries distributed by the authors at                                                  #
+#                                                                                           #
+#   http://cab.spbu.ru/files/release3.15.2/SPAdes-3.15.2-Darwin.tar.gz
+#                                                                                           #
+#   due to unavailability of parallel libstdc++ for the Clang compiler used by bioconda on  #
+#   MacOS; see https://github.com/ablab/spades/issues/194#issuecomment-523175204            #
+#                                                                                           #
+#############################################################################################
+
+# binary is not available
+# also, the whole domain content http://cab.spbu.ru/ is unavailable
+```
+
+![](img/spades_binaries_dist_3.15.2.png)
+
+``` bash
+# in any case, spades 3.15.2 doesn't work
+
+# same error,
+in construct_mapping
+    if not isinstance(key, collections.Hashable):
+ AttributeError: module 'collections' has no attribute 'Hashable'
+
+# The fix is included into the latest SPAdes 3.15.4 release
+
+# conda just has up to 3.15.2 !!!
+
+# try 
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+# commands change the order to
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+conda search spades 
+# 3.15.2 is latest, channels inc bioconda
+conda config --show channels 
+# and URLs 
+conda config --show default_channels
+# but not for bioconda
+
+# it's a mystery why versions > 3.15.2 can not be seen by
+conda search spades 
+# clearly they exist
+# https://bioconda.github.io/recipes/spades/README.html#package-spades
+
+conda update spades
+# All requested packages already installed.
+conda list | grep spades
+# spades                    3.15.2               he641558_0    bioconda
+
+# seems like I would need to setup mamba to get a working spades?
+https://bioconda.github.io/recipes/spades/README.html
+
+# get binaries from github, a viable option?
+https://github.com/ablab/spades?tab=readme-ov-file#sec2.2
+# installed in home (~)
+wget https://github.com/ablab/spades/releases/download/v3.15.5/SPAdes-3.15.5-Darwin.tar.gz
+tar -zxf SPAdes-3.15.5-Darwin.tar.gz
+cd SPAdes-3.15.5-Darwin/bin/
+
+# This seemed to work
+
+### additional commands 
+# to remove an environment e.g.
+conda remove --name bacterial-genomics-tutorial-sw1-sw1 --all
+
+conda info
+```
+
+## Quast only environment
+
+``` bash
+conda create --name just_quast
+conda activate just_quast
+conda install quast
+# has lots of dependancies and gives final messages
+
+Downloading and Extracting Packages:
+                                                                                                              
+Preparing transaction: done                                                                   
+Verifying transaction: done                                                                              
+Executing transaction: | The default QUAST package does not include:                                                                                                                              
+* GRIDSS (needed for structural variants detection)                                                             
+* SILVA 16S rRNA database (needed for reference genome detection in metagenomic datasets)
+* BUSCO tools and databases (needed for searching BUSCO genes) -- works in Linux only!                                                                                                            
+To be able to use those, please run                                                                                                                                                               
+    quast-download-gridss                                                                            
+    quast-download-silva
+    
+    
+    quast-download-busco   
+    --------------------
+
+with   Downloading BUSCO database...
+Downloading bacteria database (file: bacteria.tar.gz)...
+
+ERROR! Failed downloading bacteria database (url: https://busco-archive.ezlab.org/v3/datasets/bacteria_odb9.tar.gz), QUAST functionality will be limited! Exception caught: HTTP Error 404: Not Found
+
+You can try to download the file manually, place it in /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco/bacteria.tar.gz and restart QUAST
+
+WARNING: Failed to download bacteria database from https://busco-archive.ezlab.org/v3/datasets/bacteria_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco
+  Downloading BUSCO database...
+
+Downloading eukaryota database (file: eukaryota.tar.gz)...
+
+ERROR! Failed downloading eukaryota database (url: https://busco-archive.ezlab.org/v3/datasets/eukaryota_odb9.tar.gz), QUAST functionality will be limited! Exception caught: HTTP Error 404: Not Found
+
+You can try to download the file manually, place it in /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco/eukaryota.tar.gz and restart QUAST
+
+WARNING: Failed to download eukaryota database from https://busco-archive.ezlab.org/v3/datasets/eukaryota_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco
+  Downloading BUSCO database...
+
+Downloading fungi database (file: fungi.tar.gz)...
+
+ERROR! Failed downloading fungi database (url: https://busco-archive.ezlab.org/v3/datasets/fungi_odb9.tar.gz), QUAST functionality will be limited! Exception caught: HTTP Error 404: Not Found
+
+You can try to download the file manually, place it in /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco/fungi.tar.gz and restart QUAST
+
+WARNING: Failed to download fungi database from https://busco-archive.ezlab.org/v3/datasets/fungi_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco
+```
+
+## Pilon
+
+```{bash}
+# need pilon
+mkdir apps
+cd apps
+if [ -f pilon-1.24.jar ]; then
+    echo 'Pilon jar file exists.'
+else
+    echo 'Getting pilon jar file '
+    wget https://github.com/broadinstitute/pilon/releases/download/v1.24/pilon-1.24.jar
+fi
+echo 'Dir list'
+ls
+cd ..
+
+# link the latest version to pilon.jar
+
+
+```
+
+## Strange bug
+
+```{r}
+# R test - a good rational approximation to a math joke
+message(paste0("Rough Pie: ", 355/113, "\n",
+               " Real Pi : ", pi))
+# And the bizarre thing is, if I remove this joke block
+# the bash above does not execute
+# go figure!! makes no sense
+```

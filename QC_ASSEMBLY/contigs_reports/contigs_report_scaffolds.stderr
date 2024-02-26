@@ -1,0 +1,10 @@
+[M::mm_idx_gen::0.178*1.03] collected minimizers
+[M::mm_idx_gen::0.236*1.02] sorted minimizers
+[M::main::0.236*1.02] loaded/built the index for 1 target sequence(s)
+[M::mm_mapopt_update::0.247*1.02] mid_occ = 200
+[M::mm_idx_stat] kmer size: 19; skip: 19; is_hpc: 0; #seq: 1
+[M::mm_idx_stat::0.254*1.02] distinct minimizers: 586298 (99.27% are singletons); average occurrences: 1.058; average spacing: 10.014; total length: 6208955
+[M::worker_pipeline::1.807*1.00] mapped 545 sequences
+[M::main] Version: 2.26-r1175
+[M::main] CMD: /Users/sw/anaconda3/envs/just_quast/bin/minimap2 -c -x asm10 -B5 -O4,16 --no-long-join -r 200 -N 50 -s 65 -z 200 --mask-level 0.9 --min-occ 200 -g 2500 --score-N 2 --cs -t 1 /Users/sw/Documents/DOCS_PERSONAL/github/WGS_Bacteria/QC_ASSEMBLY/quast_corrected_input/Liflandii.fasta /Users/sw/Documents/DOCS_PERSONAL/github/WGS_Bacteria/QC_ASSEMBLY/quast_corrected_input/scaffolds.fasta
+[M::main] Real time: 1.819 sec; CPU: 1.817 sec; Peak RSS: 0.073 GB
