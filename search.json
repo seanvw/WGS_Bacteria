@@ -74,7 +74,7 @@
     "href": "example_1.html",
     "title": "Example #1",
     "section": "",
-    "text": "This example uses just the Illumina data (https://www.ebi.ac.uk/ena/browser/view/ERR3335404) generated for the study “Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate” (https://www.ebi.ac.uk/ena/browser/view/PRJEB30628). Mycobacterium ulcerans is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.\nThe reference genome paper is “Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii” and it’s sequence https://www.ncbi.nlm.nih.gov/nuccore/NC_020133. Mycobacterium liflandii 128FXT, complete sequence NCBI Reference Sequence: NC_020133.1\nThis work is based on the excellent presentation and analayis as instructed by vincentappiah video. The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability."
+    "text": "This example uses just the Illumina data (https://www.ebi.ac.uk/ena/browser/view/ERR3335404) generated for the study “Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate” (https://www.ebi.ac.uk/ena/browser/view/PRJEB30628). Mycobacterium ulcerans is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.\nThe reference genome paper is “Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii” and it’s sequence https://www.ncbi.nlm.nih.gov/nuccore/NC_020133. Mycobacterium liflandii 128FXT, complete sequence NCBI Reference Sequence: NC_020133.1\nThis work is based on the excellent presentation and analysis as instructed by vincentappiah video. The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability."
   },
   {
     "objectID": "example_1.html#enter-conda-env-data-download-qc-reports",
@@ -110,6 +110,27 @@
     "title": "Example #1",
     "section": "QC of Assembly",
     "text": "QC of Assembly\n\n# conda\nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\n\n# just the quast software\nconda activate just_quast\n\n# genomes dir taked from vincents repo\n# quast throws an error with default script\n# -t 1 solves \n# other potential issue may exist as the install of quast was not completed...\n# see SetUp page\n\n# uncomment to run again\n# mkdir QC_ASSEMBLY\n# quast.py -t 1 -o QC_ASSEMBLY -R genomes/Liflandii.fasta P7741_SPADES_OUT/scaffolds.fasta P7741.polished.fasta\n\n# Results notes\n# N50 quality didn't change with polishing, GC% didn't change,\n# Slight change in misassemblies \n# Link in the report.html\n# This workflow uses just Illumiuna data\n\nls -1 QC_ASSEMBLY\n\nconda deactivate\n\naligned_stats\nbasic_stats\ncontigs_reports\ngenome_stats\nicarus.html\nicarus_viewers\nquast.log\nreport.html\nreport.pdf\nreport.tex\nreport.tsv\nreport.txt\ntransposed_report.tex\ntransposed_report.tsv\ntransposed_report.txt\n\n\n\nQuality Assessment Tool for Genome Assemblies (QUAST)\nQC_ASSEMBLY/report.html\n\n\nIcarus QUAST Contig Browser\nQC_ASSEMBLY/icarus.html\nQC_ASSEMBLY/icarus_viewers/contig_size_viewer.html\nQC_ASSEMBLY/icarus_viewers/alignment_viewer.html"
+  },
+  {
+    "objectID": "example_1.html#reorder-contigs",
+    "href": "example_1.html#reorder-contigs",
+    "title": "Example #1",
+    "section": "Reorder contigs",
+    "text": "Reorder contigs\n\n# conda \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda activate bacterial-genomics-tutorial-sw7\n\n# genomes/Agy99.fasta is NC_008611.1 Mycobacterium ulcerans Agy99, complete sequence\n# note this is a different genome to genomes/Liflandii.fasta !!\n# uncomment to re-run\n## ragtag.py scaffold genomes/Agy99.fasta P7741.polished.fasta -o P7741_reordered\n\n# Extract the reordered contig with a custom (modified!) python script\n# The scripts accept name of the ragtag file containing the reordered contigs \n# and accession number for the reference genome\npython extract_reordered.py P7741_reordered/ragtag.scaffold.fasta NC_008611.1\n# at this stage vincent gets length of 5291728 \n# and a gc of 64.98\n# potentially the difference is due to newer version of ragtag\n# i.e. v1.0.2 vs RagTag v2.1.0\n\nconda deactivate\n\nGC Percent, opt=ignore: 65.073454\nGC Percent, opt=ignore: 65.701833\nGC Percent, opt=weighted: 65.551660\nSequence Length: 5012494 bp\ndraft genome sequence extracted"
+  },
+  {
+    "objectID": "example_1.html#mlst-and-antibiotic-resistance",
+    "href": "example_1.html#mlst-and-antibiotic-resistance",
+    "title": "Example #1",
+    "section": "MLST and Antibiotic resistance",
+    "text": "MLST and Antibiotic resistance\n\n# conda \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda activate bacterial-genomics-tutorial-sw7\n\nmlst --csv P7741.reordered.fasta &gt; mlst.csv\n\nabricate P7741.reordered.fasta &gt; amr.summary.tab\ncat amr.summary.tab\n\nconda deactivate\n\n[20:03:03] This is mlst 2.23.0 running on darwin with Perl 5.030003\n[20:03:03] Checking mlst dependencies:\n[20:03:03] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn\n[20:03:03] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta\n[20:03:03] Found blastn: 2.15.0+ (002015)\n[20:03:03] Excluding 3 schemes: vcholerae_2 abaumannii ecoli\n[20:03:05] Found exact allele match mycobacteria_2.S7-10\n[20:03:05] Found exact allele match mycobacteria_2.L16-450\n[20:03:05] Found exact allele match mycobacteria_2.S12-394\n[20:03:05] Found exact allele match mycobacteria_2.L19-11\n[20:03:05] Found exact allele match mycobacteria_2.S19-13\n[20:03:05] Found exact allele match mycobacteria_2.L35-10\n[20:03:05] Found exact allele match mycobacteria_2.S14Z-10\n[20:03:05] The manual is now quite extensive; read it at https://github.com/tseemann/mlst\n[20:03:05] Done.\nUsing nucl database ncbi:  5386 sequences -  2023-Nov-4\nProcessing: P7741.reordered.fasta\nFound 1 genes in P7741.reordered.fasta\nTip: have a suggestion for abricate? Tell me at https://github.com/tseemann/abricate/issues\nDone.\n#FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE\nP7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN"
+  },
+  {
+    "objectID": "example_1.html#genome-annotation",
+    "href": "example_1.html#genome-annotation",
+    "title": "Example #1",
+    "section": "Genome annotation",
+    "text": "Genome annotation\n\n# conda \nsource /Users/sw/anaconda3/etc/profile.d/conda.sh\nconda activate bacterial-genomics-tutorial-sw7\n\ncpus=4\n# uncomment to re-run\n#prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta\n\nget_pseudo.pl P7741_annotation/P7741.faa | tee P7741_annotation/P7741.pseudo.txt\n\nconda deactivate\n\nzsh:9: command not found: get_pseudo.pl"
   },
   {
     "objectID": "example_1.html#strange-bug",
