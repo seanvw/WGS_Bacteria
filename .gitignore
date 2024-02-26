@@ -162,11 +162,20 @@ cython_debug/
 
 # additions
 _site/
-.DS_Store/ 
+.DS_Store 
 /.quarto/
 .gitignore
 .Rhistory
 .Rproj.user/
 .ipynb_checkpoints
+polishing_process/
+QC_TRIMMED_READS/*.zip
+QC_RAW_READS/*.zip
+trimmed_reads/
+P7741_SPADES_OUT/
+P7741.polished.fasta
+
+
+
 
 
