@@ -160,6 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#main-conda-env-spades" id="toc-main-conda-env-spades" class="nav-link" data-scroll-target="#main-conda-env-spades">Main conda env / SPAdes</a></li>
   <li><a href="#quast-only-environment" id="toc-quast-only-environment" class="nav-link" data-scroll-target="#quast-only-environment">Quast only environment</a></li>
+  <li><a href="#environment-for-drep" id="toc-environment-for-drep" class="nav-link" data-scroll-target="#environment-for-drep">Environment for dREP</a></li>
   <li><a href="#pilon" id="toc-pilon" class="nav-link" data-scroll-target="#pilon">Pilon</a></li>
   <li><a href="#strange-bug" id="toc-strange-bug" class="nav-link" data-scroll-target="#strange-bug">Strange bug</a></li>
   </ul>
@@ -239,6 +240,7 @@ bacterial-genomics-tutorial-sw4     /Users/sw/anaconda3/envs/bacterial-genomics-
 bacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw5
 bacterial-genomics-tutorial-sw7     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7
 example                  /Users/sw/anaconda3/envs/example
+for_drep                 /Users/sw/anaconda3/envs/for_drep
 just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 </div>
 </div>
@@ -281,21 +283,27 @@ just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># i specify the latest version as 3.15.2</span></span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> envs_yaml/environment_sw7.yaml</span>
 <span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># and note,</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################################################</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">#   Note: SPAdes installed through bioconda on MacOS may be somewhat slower than the SPAdes #</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">#   binaries distributed by the authors at                                                  #</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">#   http://cab.spbu.ru/files/release3.15.2/SPAdes-3.15.2-Darwin.tar.gz</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co">#   due to unavailability of parallel libstdc++ for the Clang compiler used by bioconda on  #</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co">#   MacOS; see https://github.com/ablab/spades/issues/194#issuecomment-523175204            #</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################################################</span></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co"># binary is not available</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="co"># also, the whole domain content http://cab.spbu.ru/ is unavailable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># and now we need fastani</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> envs_yaml/environment_sw8.yaml</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Solving environment: | warning  libmamba Problem type not implemented SOLVER_RULE_STRICT_REPO_PRIORITY</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co"># LibMambaUnsatisfiableError: Encountered problems while solving:</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">#  - package roary-3.7.0-0 requires perl-bioperl-core &lt;1.7, but none of the providers can be installed</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co"># and note,</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################################################</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co">#   Note: SPAdes installed through bioconda on MacOS may be somewhat slower than the SPAdes #</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="co">#   binaries distributed by the authors at                                                  #</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="co">#   http://cab.spbu.ru/files/release3.15.2/SPAdes-3.15.2-Darwin.tar.gz</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="co">#   due to unavailability of parallel libstdc++ for the Clang compiler used by bioconda on  #</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="co">#   MacOS; see https://github.com/ablab/spades/issues/194#issuecomment-523175204            #</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co">#                                                                                           #</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################################################</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co"># binary is not available</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co"># also, the whole domain content http://cab.spbu.ru/ is unavailable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="img/spades_binaries_dist_3.15.2.png" class="img-fluid"></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in any case, spades 3.15.2 doesn't work</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -403,24 +411,31 @@ just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="ex">WARNING:</span> Failed to download fungi database from https://busco-archive.ezlab.org/v3/datasets/fungi_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="environment-for-drep" class="level2">
+<h2 class="anchored" data-anchor-id="environment-for-drep">Environment for dREP</h2>
+<p>create special environment for dRep because not possible to add fastani to bacterial-genomics-tutorial-sw7</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> for_drep </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate for_drep</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install drep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="pilon" class="level2">
 <h2 class="anchored" data-anchor-id="pilon">Pilon</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># need pilon</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># quick and dirty way</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: paranmeterise and check for latest version</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> apps</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> apps</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> pilon-1.24.jar <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'pilon-1.24.jar file exists.'</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'Getting pilon jar file: '</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://github.com/broadinstitute/pilon/releases/download/v1.24/pilon-1.24.jar</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># then symbolic link the latest version to pilon.jar</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'Directory listing: '</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># need pilon</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># quick and dirty way</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: paranmeterise and check for latest version</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> apps</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> apps</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> pilon-1.24.jar <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'pilon-1.24.jar file exists.'</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'Getting pilon jar file: '</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://github.com/broadinstitute/pilon/releases/download/v1.24/pilon-1.24.jar</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># then symbolic link the latest version to pilon.jar</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'Directory listing: '</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>mkdir: apps: File exists
 pilon-1.24.jar file exists.
@@ -435,18 +450,18 @@ lrwxr-xr-x  1 sw  staff        14 Feb 25 14:27 pilon.jar -&gt; pilon-1.24.jar</c
 <section id="strange-bug" class="level2">
 <h2 class="anchored" data-anchor-id="strange-bug">Strange bug</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R test - a good rational approximation to a math joke</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">paste0</span>(<span class="st">"Rough Pie: "</span>, <span class="dv">355</span><span class="sc">/</span><span class="dv">113</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">" Real Pi : "</span>, pi))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R test - a good rational approximation to a math joke</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">paste0</span>(<span class="st">"Rough Pie: "</span>, <span class="dv">355</span><span class="sc">/</span><span class="dv">113</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">" Real Pi : "</span>, pi))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rough Pie: 3.14159292035398
  Real Pi : 3.14159265358979</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And the bizarre thing is, if I remove this joke block</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the bash above does not execute</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Actually an empty {r} block is sufficient as tested with Example #1</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># go figure!! makes no sense</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Seems like a Quarto bug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And the bizarre thing is, if I remove this joke block</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the bash above does not execute</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Actually an empty {r} block is sufficient as tested with Example #1</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># go figure!! makes no sense</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Seems like a Quarto bug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
