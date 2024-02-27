@@ -156,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">Quarto</a></li>
   <li><a href="#conda" id="toc-conda" class="nav-link" data-scroll-target="#conda">Conda</a>
   <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary:</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
   <li><a href="#main-conda-env-spades" id="toc-main-conda-env-spades" class="nav-link" data-scroll-target="#main-conda-env-spades">Main conda env / SPAdes</a></li>
   <li><a href="#quast-only-environment" id="toc-quast-only-environment" class="nav-link" data-scroll-target="#quast-only-environment">Quast only environment</a></li>
@@ -187,6 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>System administration and machine set-up is often a hurdle. This page briefly documents my experience in setting up a usable working environment on a Mac laptop. For production purposes one might streamline this to a similar Docker image or similar.</p>
 <section id="quarto" class="level2">
 <h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
 <div class="cell">
@@ -200,14 +201,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="conda" class="level2">
 <h2 class="anchored" data-anchor-id="conda">Conda</h2>
 <section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary:</h3>
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
 <ul>
 <li><p>A single environment was not possible</p>
 <ul>
 <li>quast causes issues (folder envs_yaml/ and files used to help resolve issues)</li>
 </ul></li>
-<li><p>bacterial-genomics-tutorial-sw7 is the most complete and is used</p></li>
-<li><p>A second enviroment, just_quast is also needed</p></li>
+<li><p>bacterial-genomics-tutorial-sw7 is the most complete and is used</p>
+<ul>
+<li>A second environment, just_quast is also needed</li>
+</ul></li>
 <li><p>A binary install of SPAdes was needed</p></li>
 <li><p>pilon download</p></li>
 </ul>
@@ -404,26 +407,28 @@ just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 <h2 class="anchored" data-anchor-id="pilon">Pilon</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># need pilon</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> apps</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> apps</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> pilon-1.24.jar <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'Pilon jar file exists.'</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'Getting pilon jar file '</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://github.com/broadinstitute/pilon/releases/download/v1.24/pilon-1.24.jar</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'Dir list'</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># link the latest version to pilon.jar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># quick and dirty way</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: paranmeterise and check for latest version</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> apps</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> apps</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> pilon-1.24.jar <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'pilon-1.24.jar file exists.'</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">'Getting pilon jar file: '</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://github.com/broadinstitute/pilon/releases/download/v1.24/pilon-1.24.jar</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># then symbolic link the latest version to pilon.jar</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'Directory listing: '</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>mkdir: apps: File exists
-Pilon jar file exists.
-Dir list
-pilon-1.23.jar
-pilon-1.24.jar
-pilon.jar</code></pre>
+pilon-1.24.jar file exists.
+Directory listing: 
+total 35992
+-rw-r--r--  1 sw  staff   7387440 Dec  8  2021 pilon-1.23.jar
+-rw-r--r--  1 sw  staff  11034933 Dec  8  2021 pilon-1.24.jar
+lrwxr-xr-x  1 sw  staff        14 Feb 25 14:27 pilon.jar -&gt; pilon-1.24.jar</code></pre>
 </div>
 </div>
 </section>
@@ -439,7 +444,9 @@ pilon.jar</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And the bizarre thing is, if I remove this joke block</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the bash above does not execute</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># go figure!! makes no sense</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Actually an empty {r} block is sufficient as tested with Example #1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># go figure!! makes no sense</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Seems like a Quarto bug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

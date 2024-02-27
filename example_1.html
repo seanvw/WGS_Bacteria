@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#enter-conda-env-data-download-qc-reports" id="toc-enter-conda-env-data-download-qc-reports" class="nav-link active" data-scroll-target="#enter-conda-env-data-download-qc-reports">Enter Conda env, data download, QC reports</a></li>
-  <li><a href="#trim-and-qc-reports" id="toc-trim-and-qc-reports" class="nav-link" data-scroll-target="#trim-and-qc-reports">Trim and QC reports</a></li>
+  <li><a href="#trimming-and-post-trim-qc-reports" id="toc-trimming-and-post-trim-qc-reports" class="nav-link" data-scroll-target="#trimming-and-post-trim-qc-reports">Trimming and post trim QC reports</a></li>
   <li><a href="#assembly" id="toc-assembly" class="nav-link" data-scroll-target="#assembly">Assembly</a></li>
   <li><a href="#polishing" id="toc-polishing" class="nav-link" data-scroll-target="#polishing">Polishing</a></li>
   <li><a href="#qc-of-assembly" id="toc-qc-of-assembly" class="nav-link" data-scroll-target="#qc-of-assembly">QC of Assembly</a>
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#icarus-quast-contig-browser" id="toc-icarus-quast-contig-browser" class="nav-link" data-scroll-target="#icarus-quast-contig-browser">Icarus QUAST Contig Browser</a></li>
   </ul></li>
   <li><a href="#reorder-contigs" id="toc-reorder-contigs" class="nav-link" data-scroll-target="#reorder-contigs">Reorder contigs</a></li>
-  <li><a href="#mlst-and-antibiotic-resistance" id="toc-mlst-and-antibiotic-resistance" class="nav-link" data-scroll-target="#mlst-and-antibiotic-resistance">MLST and Antibiotic resistance</a></li>
+  <li><a href="#multi-locus-sequence-typing-mlst-and-antibiotic-resistance" id="toc-multi-locus-sequence-typing-mlst-and-antibiotic-resistance" class="nav-link" data-scroll-target="#multi-locus-sequence-typing-mlst-and-antibiotic-resistance">Multi-Locus Sequence Typing (MLST) and Antibiotic Resistance</a></li>
   <li><a href="#genome-annotation" id="toc-genome-annotation" class="nav-link" data-scroll-target="#genome-annotation">Genome annotation</a></li>
   <li><a href="#strange-bug" id="toc-strange-bug" class="nav-link" data-scroll-target="#strange-bug">Strange bug</a></li>
   </ul>
@@ -196,20 +196,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This work is based on the excellent presentation and analysis as instructed by vincentappiah <a href="https://www.youtube.com/watch?v=S_sRo_85jhs&amp;list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd">video</a>. The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability.</p>
 <section id="enter-conda-env-data-download-qc-reports" class="level2">
 <h2 class="anchored" data-anchor-id="enter-conda-env-data-download-qc-reports">Enter Conda env, data download, QC reports</h2>
+<p>download data and QC of raw Illumina with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" title="fastqc">fastqc</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use clean install of conda on machine in private space </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">-V</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># download data to data folder if not done already</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x download_data.sh</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ./download_data.sh</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastqc</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> QC_RAW_READS</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc data/*.fastq.gz -o QC_RAW_READS</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># all those envs explained on Set Up page</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment appropriately to re-run</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># download data to data </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># chmod +x download_data.sh</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ./download_data.sh</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastqc</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># mkdir QC_RAW_READS</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc data/*.fastq.gz -o QC_RAW_READS</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>conda 24.1.2
 # conda environments:
@@ -222,49 +224,45 @@ bacterial-genomics-tutorial-sw4     /Users/sw/anaconda3/envs/bacterial-genomics-
 bacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw5
 bacterial-genomics-tutorial-sw7     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7
 example                  /Users/sw/anaconda3/envs/example
-just_quast               /Users/sw/anaconda3/envs/just_quast
-
-mkdir: QC_RAW_READS: File exists</code></pre>
+just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 </div>
 </div>
 <p>Results files are QC html reports</p>
 <p><a href="./QC_RAW_READS/P7741_R1_fastqc.html">./QC_RAW_READS/P7741_R1_fastqc.html</a></p>
 <p><a href="./QC_RAW_READS/P7741_R1_fastqc.html">./QC_RAW_READS/P7741_R2_fastqc.html</a></p>
 </section>
-<section id="trim-and-qc-reports" class="level2">
-<h2 class="anchored" data-anchor-id="trim-and-qc-reports">Trim and QC reports</h2>
+<section id="trimming-and-post-trim-qc-reports" class="level2">
+<h2 class="anchored" data-anchor-id="trimming-and-post-trim-qc-reports">Trimming and post trim QC reports</h2>
+<p>Using <a href="http://www.usadellab.org/cms/index.php?page=trimmomatic">Trimmomatic: A flexible read trimming tool for Illumina NGS data</a> from Björn Usadel lab (hallo-chen!). Alternative is <a href="https://github.com/najoshi/sickle">Sickle</a> (A windowed adaptive trimming tool for FASTQ files using quality)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use clean install of conda on machine in private space </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmed_reads</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="va">read1</span><span class="op">=</span>data/P7741_R1.fastq.gz</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="va">read2</span><span class="op">=</span>data/P7741_R2.fastq.gz</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardPaired</span><span class="op">=</span>trimmed_reads/P7741_R1.fastq.gz    </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R1.fastq.gz</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReversePaired</span><span class="op">=</span>trimmed_reads/P7741_R2.fastq.gz</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReverseUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R2.fastq.gz</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">threads</span><span class="op">=</span>4</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># trimmomatic PE -threads $threads $read1 $read2 \</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputForwardPaired</span> <span class="va">$OutputForwardUnpaired</span> <span class="dt">\</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="va">$OutputReversePaired</span> <span class="va">$OutputReverseUnpaired</span> <span class="dt">\</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> QC_TRIMMED_READS</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to run</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment appropriately to re-run</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mkdir trimmed_reads</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="va">read1</span><span class="op">=</span>data/P7741_R1.fastq.gz</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">read2</span><span class="op">=</span>data/P7741_R2.fastq.gz</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardPaired</span><span class="op">=</span>trimmed_reads/P7741_R1.fastq.gz    </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">OutputForwardUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R1.fastq.gz</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReversePaired</span><span class="op">=</span>trimmed_reads/P7741_R2.fastq.gz</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">OutputReverseUnpaired</span><span class="op">=</span>trimmed_reads/P7741_unpaired_R2.fastq.gz</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="va">threads</span><span class="op">=</span>4</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># trimmomatic PE -threads $threads $read1 $read2 \</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># $OutputForwardPaired $OutputForwardUnpaired \</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># $OutputReversePaired $OutputReverseUnpaired \</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># mkdir QC_TRIMMED_READS</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc trimmed_reads/* -o QC_TRIMMED_READS</span></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> QC_TRIMMED_READS</span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>mkdir: trimmed_reads: File exists
-zsh:16: permission denied: trimmed_reads/P7741_R1.fastq.gz
-mkdir: QC_TRIMMED_READS: File exists
-P7741_R1_fastqc.html
+<pre><code>P7741_R1_fastqc.html
 P7741_R1_fastqc.zip
 P7741_R2_fastqc.html
 P7741_R2_fastqc.zip
@@ -274,7 +272,7 @@ P7741_unpaired_R2_fastqc.html
 P7741_unpaired_R2_fastqc.zip</code></pre>
 </div>
 </div>
-<p>Results files are QC html reports. Vincent’s results are different around 16:29. In video he says sickle trimming was used but the code uses trimmomatic.</p>
+<p>Results files are QC html reports. vincentappiah’s results are different around 16:29. In video he speaks of sickle trimming, but the code uses trimmomatic.</p>
 <p><a href="./QC_TRIMMED_READS/P7741_R1_fastqc.html">./QC_TRIMMED_READS/P7741_R1_fastqc.html</a></p>
 <p><a href="./QC_TRIMMED_READS/P7741_R1_fastqc.html">./QC_TRIMMED_READS/P7741_R2_fastqc.html</a></p>
 <p><a href="./QC_TRIMMED_READS/P7741_unpaired_R1_fastqc.html">./QC_TRIMMED_READS/P7741_unpaired_R1_fastqc.html</a></p>
@@ -282,6 +280,7 @@ P7741_unpaired_R2_fastqc.zip</code></pre>
 </section>
 <section id="assembly" class="level2">
 <h2 class="anchored" data-anchor-id="assembly">Assembly</h2>
+<p>using <a href="https://github.com/ablab/spades?tab=readme-ov-file">SPAdes - St.&nbsp;Petersburg genome assembler (SPAdes)</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real problems setting up spades with conda - notes on Set Up page</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution was to get the spades Mac binaries</span></span>
@@ -323,24 +322,28 @@ warnings.log</code></pre>
 </section>
 <section id="polishing" class="level2">
 <h2 class="anchored" data-anchor-id="polishing">Polishing</h2>
+<p>with</p>
+<ul>
+<li><p><a href="https://bio-bwa.sourceforge.net/">bwa</a> (alignment via Burrows-Wheeler transformation)</p></li>
+<li><p><a href="https://www.htslib.org/">samtools</a> (for manipulating high-throughput sequencing data)</p></li>
+<li><p><a href="https://github.com/broadinstitute/pilon/wiki">pilon</a> (automatically improve draft assemblies and find variation among strains including large event detection)</p></li>
+</ul>
+<p>Use script to do 4 rounds (not guaranteed to be optimal) of polishing. Runs but takes quite some time on my mini-server but it goes.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use standard script to do 4 rounds (not guaranteed to be optimal) of polishing</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Runs but takes quite some time on my mini-server</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To clean re-run, delete dirs,</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># polishing_process</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run script</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ./polish.sh</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> polishing_process</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To clean re-run delete dir polishing_process</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run script</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ./polish.sh</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># list out the files developed </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> polishing_process</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-polishing_process
+<pre><code>polishing_process
 polishing_process/pilon_stage4.changes
 polishing_process/pilon_stage1.fasta.ann
 polishing_process/pilon_stage3.fasta.amb
@@ -387,14 +390,15 @@ polishing_process/pilon_stage1.changes</code></pre>
 </section>
 <section id="qc-of-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="qc-of-assembly">QC of Assembly</h2>
+<p>using <a href="https://quast.sourceforge.net/">quast</a> with results linked in below</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># just the quast software</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># env just with the quast software</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate just_quast</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># genomes dir taked from vincents repo</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># genomes dir taken from vincentappiah repo</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># quast throws an error with default script</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># -t 1 solves </span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># other potential issue may exist as the install of quast was not completed...</span></span>
@@ -407,12 +411,11 @@ polishing_process/pilon_stage1.changes</code></pre>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Results notes</span></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># N50 quality didn't change with polishing, GC% didn't change,</span></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Slight change in misassemblies </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Link in the report.html</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># This workflow uses just Illumiuna data</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> QC_ASSEMBLY</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># list out the top dir </span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> QC_ASSEMBLY</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>aligned_stats
 basic_stats
@@ -444,68 +447,91 @@ transposed_report.txt</code></pre>
 </section>
 <section id="reorder-contigs" class="level2">
 <h2 class="anchored" data-anchor-id="reorder-contigs">Reorder contigs</h2>
+<p>using ragtag</p>
+<p>apart from the paper listed below, there is a more recent publication</p>
+<p><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02823-7">Automated assembly scaffolding using RagTag elevates a new tomato system for high-throughput genome editing</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># genomes/Agy99.fasta is NC_008611.1 Mycobacterium ulcerans Agy99, complete sequence</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># note this is a different genome to genomes/Liflandii.fasta !!</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">## ragtag.py scaffold genomes/Agy99.fasta P7741.polished.fasta -o P7741_reordered</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># note this is a different genome to genomes/Liflandii.fasta</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">ragtag.py</span> <span class="at">-c</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the reordered contig with a custom (modified!) python script</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The scripts accept name of the ragtag file containing the reordered contigs </span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># and accession number for the reference genome</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract_reordered.py P7741_reordered/ragtag.scaffold.fasta NC_008611.1</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># at this stage vincent gets length of 5291728 </span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># and a gc of 64.98</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># potentially the difference is due to newer version of ragtag</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># i.e. v1.0.2 vs RagTag v2.1.0</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">## ragtag.py scaffold genomes/Agy99.fasta P7741.polished.fasta -o P7741_reordered</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the reordered contig with a custom (modified!) python script</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># The scripts accept name of the ragtag file containing the reordered contigs </span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># and accession number for the reference genome</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract_reordered.py P7741_reordered/ragtag.scaffold.fasta NC_008611.1</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># at this stage vincent gets length of 5291728 </span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># and a gc of 64.98</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># potentially the difference is due to newer version of ragtag</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># i.e. v1.0.2 vs RagTag v2.1.0</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>GC Percent, opt=ignore: 65.073454
-GC Percent, opt=ignore: 65.701833
+<pre><code>
+Alonge, Michael, et al. "RaGOO: fast and accurate reference-guided scaffolding of draft genomes."
+Genome biology 20.1 (2019): 1-17.
+https://doi.org/10.1186/s13059-019-1829-6
+    
+GC Percent, opt=ignore: 65.073454
+GC Percent, opt=remove: 65.701833
 GC Percent, opt=weighted: 65.551660
 Sequence Length: 5012494 bp
 draft genome sequence extracted</code></pre>
 </div>
 </div>
 </section>
-<section id="mlst-and-antibiotic-resistance" class="level2">
-<h2 class="anchored" data-anchor-id="mlst-and-antibiotic-resistance">MLST and Antibiotic resistance</h2>
+<section id="multi-locus-sequence-typing-mlst-and-antibiotic-resistance" class="level2">
+<h2 class="anchored" data-anchor-id="multi-locus-sequence-typing-mlst-and-antibiotic-resistance">Multi-Locus Sequence Typing (MLST) and Antibiotic Resistance</h2>
+<p>using <a href="https://github.com/tseemann/mlst" class="uri">https://github.com/tseemann/mlst</a> and <a href="https://github.com/tseemann/abricate" class="uri">https://github.com/tseemann/abricate</a></p>
+<p>The results show the expected identity and there is an antibiotic resistance gene</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mlst</span> <span class="at">--csv</span> P7741.reordered.fasta <span class="op">&gt;</span> mlst.csv</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ex">abricate</span> P7741.reordered.fasta <span class="op">&gt;</span> amr.summary.tab</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> amr.summary.tab</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Alleles and witticisms"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mlst</span> <span class="at">--csv</span> P7741.reordered.fasta <span class="op">&gt;</span> mlst.csv</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Antibiotic resistance"</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="ex">abricate</span> P7741.reordered.fasta <span class="op">&gt;</span> amr.summary.tab</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> amr.summary.tab</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[20:09:36] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[20:09:36] Checking mlst dependencies:
-[20:09:36] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[20:09:36] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[20:09:36] Found blastn: 2.15.0+ (002015)
-[20:09:36] Excluding 3 schemes: ecoli abaumannii vcholerae_2
-[20:09:38] Found exact allele match mycobacteria_2.S7-10
-[20:09:38] Found exact allele match mycobacteria_2.L16-450
-[20:09:38] Found exact allele match mycobacteria_2.S12-394
-[20:09:38] Found exact allele match mycobacteria_2.L19-11
-[20:09:38] Found exact allele match mycobacteria_2.S19-13
-[20:09:38] Found exact allele match mycobacteria_2.L35-10
-[20:09:38] Found exact allele match mycobacteria_2.S14Z-10
-[20:09:38] The manual is now quite extensive; read it at https://github.com/tseemann/mlst
-[20:09:38] Done.
+<pre><code>Alleles and witticisms
+
+[12:08:45] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[12:08:45] Checking mlst dependencies:
+[12:08:45] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[12:08:45] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[12:08:45] Found blastn: 2.15.0+ (002015)
+[12:08:45] Excluding 3 schemes: vcholerae_2 abaumannii ecoli
+[12:08:47] Found exact allele match mycobacteria_2.S7-10
+[12:08:47] Found exact allele match mycobacteria_2.L16-450
+[12:08:47] Found exact allele match mycobacteria_2.S12-394
+[12:08:47] Found exact allele match mycobacteria_2.L19-11
+[12:08:47] Found exact allele match mycobacteria_2.S19-13
+[12:08:47] Found exact allele match mycobacteria_2.L35-10
+[12:08:47] Found exact allele match mycobacteria_2.S14Z-10
+[12:08:47] If you like MLST, you're going to absolutely love cgMLST!
+[12:08:47] Done.
+
+Antibiotic resistance
+
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
 Found 1 genes in P7741.reordered.fasta
-Tip: did you know? abricate was named after 'A'nti 'B'acterial 'R'esistiance
+Tip: the --fofn option allows you to feed in a big list of files to run on.
 Done.
 #FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
 P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
@@ -514,18 +540,21 @@ P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ====
 </section>
 <section id="genome-annotation" class="level2">
 <h2 class="anchored" data-anchor-id="genome-annotation">Genome annotation</h2>
+<p>using <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a> also from Torsten Seemann</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /Users/sw/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="va">cpus</span><span class="op">=</span>4</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">./get_pseudo.pl</span> P7741_annotation/P7741.faa <span class="op">&gt;</span> P7741_annotation/P7741.pseudo.txt</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-100</span>  P7741_annotation/P7741.pseudo.txt</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ran is around 10 minutes with 4 cores</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="ex">./get_pseudo.pl</span> P7741_annotation/P7741.faa <span class="op">&gt;</span> P7741_annotation/P7741.pseudo.txt</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># show some </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-50</span> P7741_annotation/P7741.pseudo.txt</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 4805 genes.
 Found 141 potential psuedo-genes
@@ -578,57 +607,7 @@ P7741_01639 &amp; P7741_01640 =&gt; Carboxylesterase NlhH
 P7741_01663 &amp; P7741_01664 =&gt; Putative diacyglycerol O-acyltransferase
 P7741_01668 &amp; P7741_01669 =&gt; Esterase PE16
 P7741_01690 &amp; P7741_01691 =&gt; Glucose-6-phosphate 1-dehydrogenase 2
-P7741_01828 &amp; P7741_01829 =&gt; putative transport protein MmpL1
-P7741_01894 &amp; P7741_01895 =&gt; putative protein
-P7741_02017 &amp; P7741_02018 =&gt; putative zinc protease
-P7741_02029 &amp; P7741_02030 =&gt; putative protein
-P7741_02030 &amp; P7741_02031 =&gt; putative protein
-P7741_02087 &amp; P7741_02088 =&gt; putative protein
-P7741_02088 &amp; P7741_02089 =&gt; putative protein
-P7741_02117 &amp; P7741_02118 =&gt; putative PPE family protein PPE47/PPE48
-P7741_02129 &amp; P7741_02130 =&gt; Diacetylchitobiose uptake system ATP-binding protein MsiK
-P7741_02151 &amp; P7741_02152 =&gt; Bifunctional apolipoprotein N-acyltransferase/polyprenol monophosphomannose synthase
-P7741_02176 &amp; P7741_02177 =&gt; putative protein
-P7741_02179 &amp; P7741_02180 =&gt; Beta-lactamase
-P7741_02180 &amp; P7741_02181 =&gt; Beta-lactamase
-P7741_02274 &amp; P7741_02275 =&gt; putative PPE family protein PPE51
-P7741_02323 &amp; P7741_02324 =&gt; putative PPE family protein PPE40
-P7741_02338 &amp; P7741_02339 =&gt; Putative flavin-containing monoamine oxidase AofH
-P7741_02372 &amp; P7741_02373 =&gt; ATP-dependent DNA helicase Rep
-P7741_02388 &amp; P7741_02389 =&gt; Acid phosphatase
-P7741_02390 &amp; P7741_02391 =&gt; Putative isochorismate synthase MenF
-P7741_02413 &amp; P7741_02414 =&gt; NADPH-dependent stearoyl-CoA 9-desaturase
-P7741_02439 &amp; P7741_02440 =&gt; Alkane 1-monooxygenase
-P7741_02442 &amp; P7741_02443 =&gt; putative protein
-P7741_02443 &amp; P7741_02444 =&gt; putative protein
-P7741_02484 &amp; P7741_02485 =&gt; D-alanine--D-alanyl carrier protein ligase
-P7741_02501 &amp; P7741_02502 =&gt; ATP-dependent RNA helicase DeaD
-P7741_02601 &amp; P7741_02602 =&gt; Alkane 1-monooxygenase
-P7741_02604 &amp; P7741_02605 =&gt; Glycogen operon protein GlgX 
-P7741_02643 &amp; P7741_02644 =&gt; Phospholipase C 1
-P7741_02692 &amp; P7741_02693 =&gt; putative protein
-P7741_02775 &amp; P7741_02776 =&gt; putative zinc-binding alcohol dehydrogenase
-P7741_02778 &amp; P7741_02779 =&gt; putative protein
-P7741_02820 &amp; P7741_02821 =&gt; Lon protease
-P7741_02821 &amp; P7741_02822 =&gt; Lon protease
-P7741_02828 &amp; P7741_02829 =&gt; putative CoA-transferase
-P7741_02829 &amp; P7741_02830 =&gt; putative CoA-transferase
-P7741_02886 &amp; P7741_02887 =&gt; putative PPE family protein PPE32
-P7741_02910 &amp; P7741_02911 =&gt; 4-alpha-glucanotransferase
-P7741_02947 &amp; P7741_02948 =&gt; Putative cytochrome P450 143
-P7741_03010 &amp; P7741_03011 =&gt; Serine/threonine-protein kinase PknK
-P7741_03016 &amp; P7741_03017 =&gt; Putative succinate-semialdehyde dehydrogenase [NADP(+)] 2
-P7741_03088 &amp; P7741_03089 =&gt; Universal stress protein
-P7741_03129 &amp; P7741_03130 =&gt; 1-deoxy-D-xylulose-5-phosphate synthase
-P7741_03136 &amp; P7741_03137 =&gt; putative transporter
-P7741_03138 &amp; P7741_03139 =&gt; Fluoroquinolones export permease protein
-P7741_03140 &amp; P7741_03141 =&gt; Fluoroquinolones export ATP-binding protein
-P7741_03144 &amp; P7741_03145 =&gt; Trk system potassium uptake protein TrkA
-P7741_03169 &amp; P7741_03170 =&gt; putative protein
-P7741_03177 &amp; P7741_03178 =&gt; putative membrane protein
-P7741_03178 &amp; P7741_03179 =&gt; putative membrane protein
-P7741_03183 &amp; P7741_03184 =&gt; tRNA dimethylallyltransferase
-P7741_03224 &amp; P7741_03225 =&gt; Acyl-CoA dehydrogenase FadE34</code></pre>
+P7741_01828 &amp; P7741_01829 =&gt; putative transport protein MmpL1</code></pre>
 </div>
 </div>
 </section>
