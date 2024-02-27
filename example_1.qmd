@@ -207,7 +207,9 @@ using <https://github.com/tseemann/mlst> and <https://github.com/tseemann/abrica
 
 The results show the expected identity (7 alleles of mycobacteria) and there is an antibiotic resistance gene.
 
-But need to use cgMLST
+But need to use cgMLST, wgMLST and more...
+
+Need to look at "chewBBACA is a comprehensive pipeline including a set of functions for the creation and validation of whole genome and core genome MultiLocus Sequence Typing (wg/cgMLST) schemas.."
 
 ```{zsh}
 # conda 
@@ -241,11 +243,45 @@ cpus=4
 # ran is around 10 minutes with 4 cores
 #prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta
 
+# show some pseudogenes
 ./get_pseudo.pl P7741_annotation/P7741.faa > P7741_annotation/P7741.pseudo.txt
-# show some 
 head -50 P7741_annotation/P7741.pseudo.txt
+
+# get some counts of genome features
+# vincentappiah numbers differ for reason speculated over in above sections
+python get_annot_stats.py P7741_annotation P7741
+
 conda deactivate
+
 ```
+
+## Comparative Analysis
+
+-   Script dendrogram.sh calls [dRep](https://github.com/MrOlm/drep) - it is installed in conda bacterial-genomics-tutorial-sw7 but not possible to add fastani
+
+-   dRep is a python program for rapidly comparing large numbers of genomes
+
+-   Comments in dendrogram.sh says it needs <https://github.com/ParBLiSS/FastANI> and that leads to <https://drep.readthedocs.io/en/latest/installation.html>
+
+-   FastANI is developed for fast alignment-free computation of whole-genome Average Nucleotide Identity (ANI).
+
+```{zsh}
+# conda 
+source ~/anaconda3/etc/profile.d/conda.sh
+# particular environment for dRep
+conda activate for_drep
+
+# dRep check_dependencies
+
+./dendogram.sh
+
+conda deactivate
+
+```
+
+![fastANI cluster](img/cluster1.png){width="500"}
+
+![MASH cluster](img/cluster2.png){width="500"}
 
 ## Strange bug
 

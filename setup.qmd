@@ -77,6 +77,12 @@ conda search spades
 # i specify the latest version as 3.15.2
 conda env create -f envs_yaml/environment_sw7.yaml
 
+# and now we need fastani
+conda env create -f envs_yaml/environment_sw8.yaml
+# Solving environment: | warning  libmamba Problem type not implemented SOLVER_RULE_STRICT_REPO_PRIORITY
+# LibMambaUnsatisfiableError: Encountered problems while solving:
+#  - package roary-3.7.0-0 requires perl-bioperl-core <1.7, but none of the providers can be installed
+
 # and note,
 #############################################################################################
 #                                                                                           #
@@ -204,6 +210,17 @@ ERROR! Failed downloading fungi database (url: https://busco-archive.ezlab.org/v
 You can try to download the file manually, place it in /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco/fungi.tar.gz and restart QUAST
 
 WARNING: Failed to download fungi database from https://busco-archive.ezlab.org/v3/datasets/fungi_odb9.tar.gz and unpack it into /Users/sw/anaconda3/envs/just_quast/lib/python3.10/site-packages/quast_libs/busco
+```
+
+## Environment for dREP
+
+create special environment for dRep because not possible to add fastani to bacterial-genomics-tutorial-sw7
+
+``` bash
+conda create --name for_drep 
+conda activate for_drep
+conda install drep
+
 ```
 
 ## Pilon
