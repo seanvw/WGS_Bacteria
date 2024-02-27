@@ -516,31 +516,31 @@ draft genome sequence extracted</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Alleles
 
-[18:18:31] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[18:18:31] Checking mlst dependencies:
-[18:18:31] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[18:18:31] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[18:18:31] Found blastn: 2.15.0+ (002015)
-[18:18:31] Excluding 3 schemes: abaumannii ecoli vcholerae_2
-[18:18:34] Found exact allele match mycobacteria_2.S7-10
-[18:18:34] Found exact allele match mycobacteria_2.L16-450
-[18:18:34] Found exact allele match mycobacteria_2.S12-394
-[18:18:34] Found exact allele match mycobacteria_2.L19-11
-[18:18:34] Found exact allele match mycobacteria_2.S19-13
-[18:18:34] Found exact allele match mycobacteria_2.L35-10
-[18:18:34] Found exact allele match mycobacteria_2.S14Z-10
-[18:18:34] You can use 'mlst --longlist' to see all the supported schemes.
-[18:18:34] Done.
+[18:22:51] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[18:22:51] Checking mlst dependencies:
+[18:22:51] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[18:22:51] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[18:22:51] Found blastn: 2.15.0+ (002015)
+[18:22:51] Excluding 3 schemes: ecoli vcholerae_2 abaumannii
+[18:22:53] Found exact allele match mycobacteria_2.S7-10
+[18:22:53] Found exact allele match mycobacteria_2.L16-450
+[18:22:53] Found exact allele match mycobacteria_2.S12-394
+[18:22:53] Found exact allele match mycobacteria_2.L19-11
+[18:22:53] Found exact allele match mycobacteria_2.S19-13
+[18:22:53] Found exact allele match mycobacteria_2.L35-10
+[18:22:53] Found exact allele match mycobacteria_2.S14Z-10
+[18:22:53] If you like MLST, you're going to absolutely love cgMLST!
+[18:22:53] Done.
 
 Antibiotic resistance
 
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
-ERROR: The input appears to be empty
-Found 0 genes in P7741.reordered.fasta
-Tip: found a bug in abricate? Post it at https://github.com/tseemann/abricate/issues.
+Found 1 genes in P7741.reordered.fasta
+Tip: the abricate manual is at https://github.com/tseemann/abricate/blob/master/README.md
 Done.
-#FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE</code></pre>
+#FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
+P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
 </div>
 </div>
 </section>
@@ -625,8 +625,8 @@ gene:4852
 tRNA:43
 tmRNA:1
 rRNA:3
-IS30 family transposase ISMsm8:1
 IS110 family transposase IS117:1
+IS30 family transposase ISMsm8:1
 Insertion_Sequences:2
 Pseudogenes:141</code></pre>
 </div>
@@ -647,35 +647,10 @@ Pseudogenes:141</code></pre>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate for_drep</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dRep check_dependencies</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="ex">./dendogram.sh</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ./dendogram.sh</span></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>mkdir: dendogram: File exists
-***************************************************
-    ..:: dRep compare Step 1. Cluster ::..
-***************************************************
-    
-Traceback (most recent call last):
-  File "/Users/sw/anaconda3/envs/for_drep/bin/dRep", line 32, in &lt;module&gt;
-    Controller().parseArguments(args)
-  File "/Users/sw/anaconda3/envs/for_drep/lib/python3.12/site-packages/drep/controller.py", line 102, in parseArguments
-    self.compare_operation(**vars(args))
-  File "/Users/sw/anaconda3/envs/for_drep/lib/python3.12/site-packages/drep/controller.py", line 53, in compare_operation
-    drep.d_workflows.compare_wrapper(kwargs['work_directory'],**kwargs)
-  File "/Users/sw/anaconda3/envs/for_drep/lib/python3.12/site-packages/drep/d_workflows.py", line 97, in compare_wrapper
-    drep.d_cluster.controller.d_cluster_wrapper(wd, **kwargs)
-  File "/Users/sw/anaconda3/envs/for_drep/lib/python3.12/site-packages/drep/d_cluster/controller.py", line 184, in d_cluster_wrapper
-    GenomeClusterController(workDirectory, **kwargs).main()
-  File "/Users/sw/anaconda3/envs/for_drep/lib/python3.12/site-packages/drep/d_cluster/controller.py", line 29, in main
-    self.parse_cluster_arguments()
-  File "/Users/sw/anaconda3/envs/for_drep/lib/python3.12/site-packages/drep/d_cluster/controller.py", line 55, in parse_cluster_arguments
-    assert self.wd.hasDb("Bdb") == False, \
-AssertionError: Don't provide new genomes- you already have them in the work directory
-dendogram generated
-output: ./dendogram</code></pre>
-</div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -693,9 +668,9 @@ output: ./dendogram</code></pre>
 <section id="strange-bug" class="level2">
 <h2 class="anchored" data-anchor-id="strange-bug">Strange bug</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With Quarto, the strange bug means that if an {r} executable block is included</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then the preceding {bash} blocks are executed, otherwise not!</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simply include this and all is executed as desired.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With Quarto, the strange bug means that if an {r} executable block is included</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then the preceding {bash} blocks are executed, otherwise not!</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simply include this and all is executed as desired.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
