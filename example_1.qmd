@@ -272,8 +272,8 @@ source ~/anaconda3/etc/profile.d/conda.sh
 conda activate for_drep
 
 # dRep check_dependencies
-
-./dendogram.sh
+# uncomment to re-run
+# ./dendogram.sh
 
 conda deactivate
 

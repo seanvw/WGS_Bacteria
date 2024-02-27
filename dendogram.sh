@@ -9,7 +9,7 @@ rm -fr tmp_fastas
 
 echo "dendogram generated"
 echo "output: ./dendogram"
-
+2
 
 #echo "This script has been deactivated."
 #echo "This is because of installation issues with fastANI"
