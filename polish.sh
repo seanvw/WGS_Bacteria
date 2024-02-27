@@ -2,7 +2,7 @@
 
 #polishing illumina draft assembly using pilon
 
-mkdir polished_assembly
+#mkdir polished_assembly
 
 #increase the number of threads if you have more cpu cores to make it run faster
 threads=4

@@ -23,7 +23,7 @@ reordered.description=''
 gci = gc_fraction(reordered.seq, "ignore") * 100
 print('GC Percent, opt=ignore: %04f'%gci)
 gcr = gc_fraction(reordered.seq, "remove") * 100
-print('GC Percent, opt=ignore: %04f'%gcr)
+print('GC Percent, opt=remove: %04f'%gcr)
 gcw = gc_fraction(reordered.seq, "weighted") * 100
 print('GC Percent, opt=weighted: %04f'%gcw)
 

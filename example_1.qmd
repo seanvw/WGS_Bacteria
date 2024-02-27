@@ -6,22 +6,25 @@ This example uses just the Illumina data (<https://www.ebi.ac.uk/ena/browser/vie
 
 The reference genome paper is "[Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3554023/)" and it's sequence <https://www.ncbi.nlm.nih.gov/nuccore/NC_020133>. Mycobacterium liflandii 128FXT, complete sequence NCBI Reference Sequence: NC_020133.1
 
-This work is based on the excellent presentation and analayis as instructed by vincentappiah [video](https://www.youtube.com/watch?v=S_sRo_85jhs&list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd). The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability.
+This work is based on the excellent presentation and analysis as instructed by vincentappiah [video](https://www.youtube.com/watch?v=S_sRo_85jhs&list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd). The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability.
 
 ## Enter Conda env, data download, QC reports
 
+download data and QC of raw Illumina with [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/ "fastqc")
+
 ```{zsh}
 # use clean install of conda on machine in private space 
-source /Users/sw/anaconda3/etc/profile.d/conda.sh
+source ~/anaconda3/etc/profile.d/conda.sh
 conda -V
+# all those envs explained on Set Up page
 conda env list
 conda activate bacterial-genomics-tutorial-sw7
-# download data to data folder if not done already
-chmod +x download_data.sh
-# uncomment to re-run
+# uncomment appropriately to re-run
+# download data to data 
+# chmod +x download_data.sh
 # ./download_data.sh
 # run fastqc
-mkdir QC_RAW_READS
+# mkdir QC_RAW_READS
 # fastqc data/*.fastq.gz -o QC_RAW_READS
 conda deactivate
 ```
@@ -32,15 +35,18 @@ Results files are QC html reports
 
 [./QC_RAW_READS/P7741_R2_fastqc.html](./QC_RAW_READS/P7741_R1_fastqc.html)
 
-## Trim and QC reports
+## Trimming and post trim QC reports
+
+Using [Trimmomatic: A flexible read trimming tool for Illumina NGS data](http://www.usadellab.org/cms/index.php?page=trimmomatic) from Björn Usadel lab (hallöchen!). Alternative is [Sickle](https://github.com/najoshi/sickle) (A windowed adaptive trimming tool for FASTQ files using quality)
 
 ```{zsh}
 # use clean install of conda on machine in private space 
-source /Users/sw/anaconda3/etc/profile.d/conda.sh
-conda -V
+source ~/anaconda3/etc/profile.d/conda.sh
 conda activate bacterial-genomics-tutorial-sw7
 
-mkdir trimmed_reads
+# uncomment appropriately to re-run
+
+# mkdir trimmed_reads
 read1=data/P7741_R1.fastq.gz
 read2=data/P7741_R2.fastq.gz
 OutputForwardPaired=trimmed_reads/P7741_R1.fastq.gz    
@@ -49,14 +55,12 @@ OutputReversePaired=trimmed_reads/P7741_R2.fastq.gz
 OutputReverseUnpaired=trimmed_reads/P7741_unpaired_R2.fastq.gz
 threads=4
 
-# uncomment to run
 # trimmomatic PE -threads $threads $read1 $read2 \
-$OutputForwardPaired $OutputForwardUnpaired \
-$OutputReversePaired $OutputReverseUnpaired \
-ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25
+# $OutputForwardPaired $OutputForwardUnpaired \
+# $OutputReversePaired $OutputReverseUnpaired \
+# ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:8:true HEADCROP:3 TRAILING:10 MINLEN:25
 
-mkdir QC_TRIMMED_READS
-# uncomment to run
+# mkdir QC_TRIMMED_READS
 # fastqc trimmed_reads/* -o QC_TRIMMED_READS
 
 ls -1 QC_TRIMMED_READS
@@ -64,7 +68,7 @@ ls -1 QC_TRIMMED_READS
 conda deactivate
 ```
 
-Results files are QC html reports. Vincent's results are different around 16:29. In video he says sickle trimming was used but the code uses trimmomatic.
+Results files are QC html reports. vincentappiah's results are different around 16:29. In video he speaks of sickle trimming, but the code uses trimmomatic.
 
 [./QC_TRIMMED_READS/P7741_R1_fastqc.html](./QC_TRIMMED_READS/P7741_R1_fastqc.html)
 
@@ -75,6 +79,8 @@ Results files are QC html reports. Vincent's results are different around 16:29.
 [./QC_TRIMMED_READS/P7741_unpaired_R2_fastqc.html](./QC_TRIMMED_READS/P7741_unpaired_R2_fastqc.html)
 
 ## Assembly
+
+using [SPAdes - St. Petersburg genome assembler (SPAdes)](https://github.com/ablab/spades?tab=readme-ov-file)
 
 ```{zsh}
 # Real problems setting up spades with conda - notes on Set Up page
@@ -92,34 +98,43 @@ ls -1 P7741_SPADES_OUT
 
 ## Polishing
 
+with
+
+-   [bwa](https://bio-bwa.sourceforge.net/) (alignment via Burrows-Wheeler transformation)
+
+-   [samtools](https://www.htslib.org/) (for manipulating high-throughput sequencing data)
+
+-   [pilon](https://github.com/broadinstitute/pilon/wiki) (automatically improve draft assemblies and find variation among strains including large event detection)
+
+Use script to do 4 rounds (not guaranteed to be optimal) of polishing. Runs but takes quite some time on my mini-server but it goes.
+
 ```{zsh}
 # conda 
-source /Users/sw/anaconda3/etc/profile.d/conda.sh
+source ~/anaconda3/etc/profile.d/conda.sh
 conda activate bacterial-genomics-tutorial-sw7
-# Use standard script to do 4 rounds (not guaranteed to be optimal) of polishing
-# Runs but takes quite some time on my mini-server
-# To clean re-run, delete dirs,
-# polishing_process
-# polished_assembly
+
+# To clean re-run delete dir polishing_process
 # re-run script
 # ./polish.sh
 
-ls -1 polishing_process
-ls -1 polished_assembly
+# list out the files developed 
+find polishing_process
 
 conda deactivate
 ```
 
 ## QC of Assembly
 
+using [quast](https://quast.sourceforge.net/) with results linked in below
+
 ```{zsh}
 # conda
-source /Users/sw/anaconda3/etc/profile.d/conda.sh
-conda -V
-# just the quast software
+source ~/anaconda3/etc/profile.d/conda.sh
+
+# env just with the quast software
 conda activate just_quast
 
-# genomes dir taked from vincents repo
+# genomes dir taken from vincentappiah repo
 # quast throws an error with default script
 # -t 1 solves 
 # other potential issue may exist as the install of quast was not completed...
@@ -132,11 +147,103 @@ conda activate just_quast
 # Results notes
 # N50 quality didn't change with polishing, GC% didn't change,
 # Slight change in misassemblies 
-# Link in the report.html
-# This workflow uses just Illumiuna data
 
+# list out the top dir 
 ls -1 QC_ASSEMBLY
 
+conda deactivate
+```
+
+### Quality Assessment Tool for Genome Assemblies (QUAST)
+
+[QC_ASSEMBLY/report.html](QC_ASSEMBLY/report.html)
+
+### Icarus QUAST Contig Browser
+
+[QC_ASSEMBLY/icarus.html](QC_ASSEMBLY/icarus.html "QC_ASSEMBLY/icarus.html")
+
+[QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html](QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html)
+
+[QC_ASSEMBLY/icarus_viewers/alignment_viewer.html](QC_ASSEMBLY/icarus_viewers/alignment_viewer.html "QC_ASSEMBLY/icarus_viewers/alignment_viewer.html")
+
+## Reorder contigs
+
+using ragtag
+
+apart from the paper listed below, there is a more recent publication
+
+[Automated assembly scaffolding using RagTag elevates a new tomato system for high-throughput genome editing](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02823-7)
+
+```{zsh}
+# conda 
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate bacterial-genomics-tutorial-sw7
+
+# genomes/Agy99.fasta is NC_008611.1 Mycobacterium ulcerans Agy99, complete sequence
+# note this is a different genome to genomes/Liflandii.fasta
+
+ragtag.py -c
+
+# uncomment to re-run
+## ragtag.py scaffold genomes/Agy99.fasta P7741.polished.fasta -o P7741_reordered
+
+# Extract the reordered contig with a custom (modified!) python script
+# The scripts accept name of the ragtag file containing the reordered contigs 
+# and accession number for the reference genome
+
+python extract_reordered.py P7741_reordered/ragtag.scaffold.fasta NC_008611.1
+
+# at this stage vincentappiah gets length of 5291728 
+# and a gc of 64.98
+# potentially the difference is due to newer version of ragtag
+# i.e. v1.0.2 vs RagTag v2.1.0
+
+conda deactivate
+```
+
+## Multi-Locus Sequence Typing (MLST) and Antibiotic Resistance
+
+using <https://github.com/tseemann/mlst> and <https://github.com/tseemann/abricate>
+
+The results show the expected identity (7 alleles of mycobacteria) and there is an antibiotic resistance gene.
+
+But need to use cgMLST
+
+```{zsh}
+# conda 
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate bacterial-genomics-tutorial-sw7
+
+echo "Alleles"
+echo ""
+mlst --csv P7741.reordered.fasta > mlst.csv
+
+echo ""
+echo "Antibiotic resistance"
+echo ""
+abricate P7741.reordered.fasta > amr.summary.tab
+cat amr.summary.tab
+
+conda deactivate
+```
+
+## Genome annotation
+
+using <https://github.com/tseemann/prokka> also from Torsten Seemann
+
+```{zsh}
+# conda 
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate bacterial-genomics-tutorial-sw7
+
+cpus=4
+# uncomment to re-run
+# ran is around 10 minutes with 4 cores
+#prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta
+
+./get_pseudo.pl P7741_annotation/P7741.faa > P7741_annotation/P7741.pseudo.txt
+# show some 
+head -50 P7741_annotation/P7741.pseudo.txt
 conda deactivate
 ```
 

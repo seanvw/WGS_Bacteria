@@ -2,6 +2,8 @@
 title: "Set Up Notes"
 ---
 
+System administration and machine set-up is often a hurdle. This page briefly documents my experience in setting up a usable working environment on a Mac laptop. For production purposes one might streamline this to a similar Docker image or similar.
+
 ## Quarto
 
 ```{bash}
@@ -11,7 +13,7 @@ quarto -v
 
 ## Conda
 
-### Summary:
+### Summary
 
 -   A single environment was not possible
 
@@ -19,7 +21,7 @@ quarto -v
 
 -   bacterial-genomics-tutorial-sw7 is the most complete and is used
 
--   A second enviroment, just_quast is also needed
+    -   A second environment, just_quast is also needed
 
 -   A binary install of SPAdes was needed
 
@@ -208,20 +210,20 @@ WARNING: Failed to download fungi database from https://busco-archive.ezlab.org/
 
 ```{bash}
 # need pilon
+# quick and dirty way
+# TODO: paranmeterise and check for latest version
 mkdir apps
 cd apps
 if [ -f pilon-1.24.jar ]; then
-    echo 'Pilon jar file exists.'
+    echo 'pilon-1.24.jar file exists.'
 else
-    echo 'Getting pilon jar file '
+    echo 'Getting pilon jar file: '
     wget https://github.com/broadinstitute/pilon/releases/download/v1.24/pilon-1.24.jar
 fi
-echo 'Dir list'
-ls
+# then symbolic link the latest version to pilon.jar
+echo 'Directory listing: '
+ls -l
 cd ..
-
-# link the latest version to pilon.jar
-
 
 ```
 
@@ -233,5 +235,7 @@ message(paste0("Rough Pie: ", 355/113, "\n",
                " Real Pi : ", pi))
 # And the bizarre thing is, if I remove this joke block
 # the bash above does not execute
+# Actually an empty {r} block is sufficient as tested with Example #1
 # go figure!! makes no sense
+# Seems like a Quarto bug
 ```
