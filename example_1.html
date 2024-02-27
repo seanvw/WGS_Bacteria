@@ -233,7 +233,7 @@ just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 </section>
 <section id="trimming-and-post-trim-qc-reports" class="level2">
 <h2 class="anchored" data-anchor-id="trimming-and-post-trim-qc-reports">Trimming and post trim QC reports</h2>
-<p>Using <a href="http://www.usadellab.org/cms/index.php?page=trimmomatic">Trimmomatic: A flexible read trimming tool for Illumina NGS data</a> from Björn Usadel lab (hallo-chen!). Alternative is <a href="https://github.com/najoshi/sickle">Sickle</a> (A windowed adaptive trimming tool for FASTQ files using quality)</p>
+<p>Using <a href="http://www.usadellab.org/cms/index.php?page=trimmomatic">Trimmomatic: A flexible read trimming tool for Illumina NGS data</a> from Björn Usadel lab (hallöchen!). Alternative is <a href="https://github.com/najoshi/sickle">Sickle</a> (A windowed adaptive trimming tool for FASTQ files using quality)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use clean install of conda on machine in private space </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
@@ -466,13 +466,15 @@ transposed_report.txt</code></pre>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the reordered contig with a custom (modified!) python script</span></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># The scripts accept name of the ragtag file containing the reordered contigs </span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># and accession number for the reference genome</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract_reordered.py P7741_reordered/ragtag.scaffold.fasta NC_008611.1</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># at this stage vincent gets length of 5291728 </span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># and a gc of 64.98</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># potentially the difference is due to newer version of ragtag</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># i.e. v1.0.2 vs RagTag v2.1.0</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> extract_reordered.py P7741_reordered/ragtag.scaffold.fasta NC_008611.1</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># at this stage vincentappiah gets length of 5291728 </span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># and a gc of 64.98</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># potentially the difference is due to newer version of ragtag</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co"># i.e. v1.0.2 vs RagTag v2.1.0</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Alonge, Michael, et al. "RaGOO: fast and accurate reference-guided scaffolding of draft genomes."
@@ -490,13 +492,14 @@ draft genome sequence extracted</code></pre>
 <section id="multi-locus-sequence-typing-mlst-and-antibiotic-resistance" class="level2">
 <h2 class="anchored" data-anchor-id="multi-locus-sequence-typing-mlst-and-antibiotic-resistance">Multi-Locus Sequence Typing (MLST) and Antibiotic Resistance</h2>
 <p>using <a href="https://github.com/tseemann/mlst" class="uri">https://github.com/tseemann/mlst</a> and <a href="https://github.com/tseemann/abricate" class="uri">https://github.com/tseemann/abricate</a></p>
-<p>The results show the expected identity and there is an antibiotic resistance gene</p>
+<p>The results show the expected identity (7 alleles of mycobacteria) and there is an antibiotic resistance gene.</p>
+<p>But need to use cgMLST</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Alleles and witticisms"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Alleles"</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mlst</span> <span class="at">--csv</span> P7741.reordered.fasta <span class="op">&gt;</span> mlst.csv</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -508,30 +511,30 @@ draft genome sequence extracted</code></pre>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Alleles and witticisms
+<pre><code>Alleles
 
-[12:08:45] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[12:08:45] Checking mlst dependencies:
-[12:08:45] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[12:08:45] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[12:08:45] Found blastn: 2.15.0+ (002015)
-[12:08:45] Excluding 3 schemes: vcholerae_2 abaumannii ecoli
-[12:08:47] Found exact allele match mycobacteria_2.S7-10
-[12:08:47] Found exact allele match mycobacteria_2.L16-450
-[12:08:47] Found exact allele match mycobacteria_2.S12-394
-[12:08:47] Found exact allele match mycobacteria_2.L19-11
-[12:08:47] Found exact allele match mycobacteria_2.S19-13
-[12:08:47] Found exact allele match mycobacteria_2.L35-10
-[12:08:47] Found exact allele match mycobacteria_2.S14Z-10
-[12:08:47] If you like MLST, you're going to absolutely love cgMLST!
-[12:08:47] Done.
+[12:20:40] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[12:20:40] Checking mlst dependencies:
+[12:20:40] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[12:20:40] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[12:20:40] Found blastn: 2.15.0+ (002015)
+[12:20:40] Excluding 3 schemes: vcholerae_2 ecoli abaumannii
+[12:20:42] Found exact allele match mycobacteria_2.S7-10
+[12:20:42] Found exact allele match mycobacteria_2.L16-450
+[12:20:42] Found exact allele match mycobacteria_2.S12-394
+[12:20:42] Found exact allele match mycobacteria_2.L19-11
+[12:20:42] Found exact allele match mycobacteria_2.S19-13
+[12:20:42] Found exact allele match mycobacteria_2.L35-10
+[12:20:42] Found exact allele match mycobacteria_2.S14Z-10
+[12:20:42] If you like MLST, you're absolutely going to love wgMLST!
+[12:20:42] Done.
 
 Antibiotic resistance
 
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
 Found 1 genes in P7741.reordered.fasta
-Tip: the --fofn option allows you to feed in a big list of files to run on.
+Tip: abricate can also find virulence factors; use --list to see all supported databases.
 Done.
 #FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
 P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
