@@ -164,8 +164,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#reorder-contigs" id="toc-reorder-contigs" class="nav-link" data-scroll-target="#reorder-contigs">Reorder contigs</a></li>
   <li><a href="#multi-locus-sequence-typing-mlst-and-antibiotic-resistance" id="toc-multi-locus-sequence-typing-mlst-and-antibiotic-resistance" class="nav-link" data-scroll-target="#multi-locus-sequence-typing-mlst-and-antibiotic-resistance">Multi-Locus Sequence Typing (MLST) and Antibiotic Resistance</a></li>
-  <li><a href="#genome-annotation" id="toc-genome-annotation" class="nav-link" data-scroll-target="#genome-annotation">Genome annotation</a></li>
-  <li><a href="#comparative-analysis" id="toc-comparative-analysis" class="nav-link" data-scroll-target="#comparative-analysis">Comparative Analysis</a></li>
+  <li><a href="#rapid-prokaryotic-genome-annotation" id="toc-rapid-prokaryotic-genome-annotation" class="nav-link" data-scroll-target="#rapid-prokaryotic-genome-annotation">Rapid prokaryotic genome annotation</a></li>
+  <li><a href="#comparative-analysis" id="toc-comparative-analysis" class="nav-link" data-scroll-target="#comparative-analysis">Comparative Analysis</a>
+  <ul class="collapse">
+  <li><a href="#average-nucleotide-identity" id="toc-average-nucleotide-identity" class="nav-link" data-scroll-target="#average-nucleotide-identity">Average Nucleotide Identity</a></li>
+  <li><a href="#generate-genome-feature-files" id="toc-generate-genome-feature-files" class="nav-link" data-scroll-target="#generate-genome-feature-files">Generate Genome Feature Files</a></li>
+  <li><a href="#genome-ring-structures-using-brig" id="toc-genome-ring-structures-using-brig" class="nav-link" data-scroll-target="#genome-ring-structures-using-brig">Genome ring structures using BRIG</a></li>
+  <li><a href="#generate-pangenome" id="toc-generate-pangenome" class="nav-link" data-scroll-target="#generate-pangenome">Generate Pangenome</a></li>
+  </ul></li>
   <li><a href="#strange-bug" id="toc-strange-bug" class="nav-link" data-scroll-target="#strange-bug">Strange bug</a></li>
   </ul>
 </nav>
@@ -192,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This example uses just the Illumina data (<a href="https://www.ebi.ac.uk/ena/browser/view/ERR3335404" class="uri">https://www.ebi.ac.uk/ena/browser/view/ERR3335404</a>) generated for the study “<strong>Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate</strong>” (<a href="https://www.ebi.ac.uk/ena/browser/view/PRJEB30628" class="uri">https://www.ebi.ac.uk/ena/browser/view/PRJEB30628</a>). Mycobacterium ulcerans is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.</p>
+<p>This example uses just the Illumina data (<a href="https://www.ebi.ac.uk/ena/browser/view/ERR3335404" class="uri">https://www.ebi.ac.uk/ena/browser/view/ERR3335404</a>) generated for the study “<em>Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate</em>” (<a href="https://www.ebi.ac.uk/ena/browser/view/PRJEB30628" class="uri">https://www.ebi.ac.uk/ena/browser/view/PRJEB30628</a>). Mycobacterium ulcerans is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.</p>
 <p>The reference genome paper is “<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3554023/">Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii</a>” and it’s sequence <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_020133" class="uri">https://www.ncbi.nlm.nih.gov/nuccore/NC_020133</a>. Mycobacterium liflandii 128FXT, complete sequence NCBI Reference Sequence: NC_020133.1</p>
 <p>This work is based on the excellent presentation and analysis as instructed by vincentappiah <a href="https://www.youtube.com/watch?v=S_sRo_85jhs&amp;list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd">video</a>. The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability.</p>
 <section id="enter-conda-env-data-download-qc-reports" class="level2">
@@ -516,36 +522,36 @@ draft genome sequence extracted</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Alleles
 
-[18:22:51] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[18:22:51] Checking mlst dependencies:
-[18:22:51] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[18:22:51] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[18:22:51] Found blastn: 2.15.0+ (002015)
-[18:22:51] Excluding 3 schemes: ecoli vcholerae_2 abaumannii
-[18:22:53] Found exact allele match mycobacteria_2.S7-10
-[18:22:53] Found exact allele match mycobacteria_2.L16-450
-[18:22:53] Found exact allele match mycobacteria_2.S12-394
-[18:22:53] Found exact allele match mycobacteria_2.L19-11
-[18:22:53] Found exact allele match mycobacteria_2.S19-13
-[18:22:53] Found exact allele match mycobacteria_2.L35-10
-[18:22:53] Found exact allele match mycobacteria_2.S14Z-10
-[18:22:53] If you like MLST, you're going to absolutely love cgMLST!
-[18:22:53] Done.
+[17:23:12] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[17:23:12] Checking mlst dependencies:
+[17:23:12] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[17:23:12] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[17:23:12] Found blastn: 2.15.0+ (002015)
+[17:23:12] Excluding 3 schemes: abaumannii vcholerae_2 ecoli
+[17:23:15] Found exact allele match mycobacteria_2.S7-10
+[17:23:15] Found exact allele match mycobacteria_2.L16-450
+[17:23:15] Found exact allele match mycobacteria_2.S12-394
+[17:23:15] Found exact allele match mycobacteria_2.L19-11
+[17:23:15] Found exact allele match mycobacteria_2.S19-13
+[17:23:15] Found exact allele match mycobacteria_2.L35-10
+[17:23:15] Found exact allele match mycobacteria_2.S14Z-10
+[17:23:15] Did you know mlst also works on .gbk and .gz files?
+[17:23:15] Done.
 
 Antibiotic resistance
 
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
 Found 1 genes in P7741.reordered.fasta
-Tip: the abricate manual is at https://github.com/tseemann/abricate/blob/master/README.md
+Tip: you can use the --summary option to combine reports in a presence/absence matrix.
 Done.
 #FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
 P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
 </div>
 </div>
 </section>
-<section id="genome-annotation" class="level2">
-<h2 class="anchored" data-anchor-id="genome-annotation">Genome annotation</h2>
+<section id="rapid-prokaryotic-genome-annotation" class="level2">
+<h2 class="anchored" data-anchor-id="rapid-prokaryotic-genome-annotation">Rapid prokaryotic genome annotation</h2>
 <p>using <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a> also from Torsten Seemann</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
@@ -625,8 +631,8 @@ gene:4852
 tRNA:43
 tmRNA:1
 rRNA:3
-IS110 family transposase IS117:1
 IS30 family transposase ISMsm8:1
+IS110 family transposase IS117:1
 Insertion_Sequences:2
 Pseudogenes:141</code></pre>
 </div>
@@ -634,11 +640,13 @@ Pseudogenes:141</code></pre>
 </section>
 <section id="comparative-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="comparative-analysis">Comparative Analysis</h2>
+<section id="average-nucleotide-identity" class="level3">
+<h3 class="anchored" data-anchor-id="average-nucleotide-identity">Average Nucleotide Identity</h3>
 <ul>
-<li><p>Script dendrogram.sh calls <a href="https://github.com/MrOlm/drep">dRep</a> - it is installed in conda bacterial-genomics-tutorial-sw7 but not possible to add fastani</p></li>
 <li><p>dRep is a python program for rapidly comparing large numbers of genomes</p></li>
 <li><p>Comments in dendrogram.sh says it needs <a href="https://github.com/ParBLiSS/FastANI" class="uri">https://github.com/ParBLiSS/FastANI</a> and that leads to <a href="https://drep.readthedocs.io/en/latest/installation.html" class="uri">https://drep.readthedocs.io/en/latest/installation.html</a></p></li>
 <li><p>FastANI is developed for fast alignment-free computation of whole-genome Average Nucleotide Identity (ANI).</p></li>
+<li><p>Script dendrogram.sh calls <a href="https://github.com/MrOlm/drep">dRep</a>: it is installed in conda bacterial-genomics-tutorial-sw7 but not possible to add fastani to this build do to errors (with perl versions if I remember correctly), so build a particular environment for dRep (see Set Up page).</p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
@@ -652,25 +660,163 @@ Pseudogenes:141</code></pre>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ul>
+<li><p>Some of the outputs from the PDFs generated are given as screen-shot images here.</p></li>
+<li><p>Cluster of P7741/Liflandii/Shinsuense is different between methods ANI methods but agreement with the distinction of SGL03 and Agy99 that are approaching 100% Average Nucleotide Identity.</p></li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/cluster1.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>fastANI cluster</figcaption>
+<figcaption>fastANI cluster: just the <em>Mycobacterium ulcerans</em> genomes</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/cluster2.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>MASH cluster</figcaption>
+<p><img src="img/cluster2.png" class="img-fluid figure-img" width="700"></p>
+<figcaption>MASH cluster: H37Rv (green label - hard to read in image) is <em>Mycobacterium tuberculosis</em> and is clearly very different, an outlier with respect to ANI, to the <em>Mycobacterium ulcerans</em> genomes.</figcaption>
 </figure>
 </div>
+</section>
+<section id="generate-genome-feature-files" class="level3">
+<h3 class="anchored" data-anchor-id="generate-genome-feature-files">Generate Genome Feature Files</h3>
+<p>using <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a> to run 5 reference genomes Agy99 Liflandii SGL03 Shinsuense H37Rv</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># takes just over an hour on laptop to </span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># generate gffs for 6 bacterial genomes</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ./get_genome_gffs.sh </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> gffs <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $5 " " $6 $7 " " $8" " $9}'</span> </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+7.2M Feb28 12:27 Agy99.gff
+5.5M Feb28 13:35 H37Rv.gff
+8.0M Feb28 12:43 Liflandii.gff
+6.4M Feb28 13:35 P7741.gff
+7.2M Feb28 12:52 SGL03.gff
+7.6M Feb28 13:27 Shinsuense.gff</code></pre>
+</div>
+</div>
+</section>
+<section id="genome-ring-structures-using-brig" class="level3">
+<h3 class="anchored" data-anchor-id="genome-ring-structures-using-brig">Genome ring structures using BRIG</h3>
+<p><a href="https://github.com/happykhan/BRIG" class="uri">https://github.com/happykhan/BRIG</a></p>
+<p>BRIG-0.95-distjava -Xmx1500M -jar BRIG.jar</p>
+<p>needs Genbank formats as generated by prokka e.g.&nbsp;P7741.gbk</p>
+<p>but, these were deleted by the get_genome_gffs.sh script that used prokka</p>
+<p>need to re-run with delete turned off… later…</p>
+</section>
+<section id="generate-pangenome" class="level3">
+<h3 class="anchored" data-anchor-id="generate-pangenome">Generate Pangenome</h3>
+<p>Roary is a high speed stand alone pan genome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.</p>
+<p>using</p>
+<ul>
+<li><p>roary and roary_plots.py <a href="https://sanger-pathogens.github.io/Roary/" class="uri">https://sanger-pathogens.github.io/Roary/</a></p>
+<ul>
+<li>Roary is a high speed stand alone pan genome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.</li>
+</ul></li>
+<li><p>FastTree <a href="https://microbesonline.org/fasttree/" class="uri">https://microbesonline.org/fasttree/</a></p>
+<ul>
+<li>FastTree infers approximately-maximum-likelihood phylogenetic trees from alignments of nucleotide or protein sequences.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment to re-run</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ./get_pangenome.sh </span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Pangenome analysis using roary and fasttree</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># i have 4 cores</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="va">threads</span><span class="op">=</span>4</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># # Uncomment appropriately to re-run</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># roary -f pangenome -p $threads -e -n -v --mafft gffs/*.gff</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># # Generate alignment file</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># FastTree -nt -gtr pangenome/core_gene_alignment.aln &gt; pangenome/mytree.newick</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># # Plot phylogenetic tree and presence/absense in svg format</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># python roary_plots.py --labels --format svg pangenome/mytree.newick pangenome/gene_presence_absence.csv</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># # same as png</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co"># python roary_plots.py --labels              pangenome/mytree.newick pangenome/gene_presence_absence.csv</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co"># # move all pangenome plots to img folder</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co"># mv pangenome_*.{svg,png} img</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co"># # generates gene_count_summary.png that needs to be renamed and moved </span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co"># # 3 closely related genomes</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co"># python gene_count_summary.py P7741 Agy99 Liflandii pangenome/gene_presence_absence.csv</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co"># mv gene_count_summary.png  img/P7741_Agy99_Liflandii.png</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co"># # 2 closely related genomes and Mtycobacterium tuberculosis</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co"># python gene_count_summary.py P7741 H37Rv Liflandii pangenome/gene_presence_absence.csv</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co"># mv gene_count_summary.png  img/P7741_H37Rv_Liflandii.png</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Genomes used with Roary:"</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> gffs/<span class="pp">*</span>.gff</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"pangenome/summary_statistics.txt"</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> pangenome/summary_statistics.txt</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Genomes used with Roary:
+gffs/Agy99.gff
+gffs/H37Rv.gff
+gffs/Liflandii.gff
+gffs/P7741.gff
+gffs/SGL03.gff
+gffs/Shinsuense.gff
+
+pangenome/summary_statistics.txt
+Core genes  (99% &lt;= strains &lt;= 100%)    91
+Soft core genes (95% &lt;= strains &lt; 99%)  0
+Shell genes (15% &lt;= strains &lt; 95%)  11844
+Cloud genes (0% &lt;= strains &lt; 15%)   0
+Total genes (0% &lt;= strains &lt;= 100%) 11935</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/pangenome_matrix.png" class="img-fluid figure-img" width="5100"></p>
+<figcaption>Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between &gt;= 99% similarity).</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/pangenome_frequency.png" class="img-fluid figure-img" width="1050"></p>
+<figcaption>Pangenome Frequency.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/P7741_Agy99_Liflandii.png" class="img-fluid figure-img"></p>
+<figcaption>Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733) Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/P7741_H37Rv_Liflandii.png" class="img-fluid figure-img"></p>
+<figcaption>Genes unique to the set P7741, H37Rv, Liflandii (5169 = 390 + 0 + 3904 + 141 + 1 + 0 + 733).</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="strange-bug" class="level2">
 <h2 class="anchored" data-anchor-id="strange-bug">Strange bug</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With Quarto, the strange bug means that if an {r} executable block is included</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then the preceding {bash} blocks are executed, otherwise not!</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simply include this and all is executed as desired.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With Quarto, the strange bug means that if an {r} executable block is included</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then the preceding {bash} blocks are executed, otherwise not!</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simply include this and all is executed as desired.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
