@@ -220,7 +220,7 @@ create special environment for dRep because not possible to add fastani to bacte
 conda create --name for_drep 
 conda activate for_drep
 conda install drep
-
+conda deactivate
 ```
 
 ## Pilon
