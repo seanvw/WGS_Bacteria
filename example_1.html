@@ -168,8 +168,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#comparative-analysis" id="toc-comparative-analysis" class="nav-link" data-scroll-target="#comparative-analysis">Comparative Analysis</a>
   <ul class="collapse">
   <li><a href="#average-nucleotide-identity" id="toc-average-nucleotide-identity" class="nav-link" data-scroll-target="#average-nucleotide-identity">Average Nucleotide Identity</a></li>
-  <li><a href="#generate-genome-feature-files" id="toc-generate-genome-feature-files" class="nav-link" data-scroll-target="#generate-genome-feature-files">Generate Genome Feature Files</a></li>
   <li><a href="#genome-ring-structures-using-brig" id="toc-genome-ring-structures-using-brig" class="nav-link" data-scroll-target="#genome-ring-structures-using-brig">Genome ring structures using BRIG</a></li>
+  <li><a href="#generate-genome-feature-files" id="toc-generate-genome-feature-files" class="nav-link" data-scroll-target="#generate-genome-feature-files">Generate Genome Feature Files</a></li>
   <li><a href="#generate-pangenome" id="toc-generate-pangenome" class="nav-link" data-scroll-target="#generate-pangenome">Generate Pangenome</a></li>
   </ul></li>
   <li><a href="#bug-note" id="toc-bug-note" class="nav-link" data-scroll-target="#bug-note">Bug note</a></li>
@@ -522,28 +522,28 @@ draft genome sequence extracted</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Alleles
 
-[09:52:04] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[09:52:04] Checking mlst dependencies:
-[09:52:04] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[09:52:04] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[09:52:04] Found blastn: 2.15.0+ (002015)
-[09:52:04] Excluding 3 schemes: abaumannii vcholerae_2 ecoli
-[09:52:07] Found exact allele match mycobacteria_2.S7-10
-[09:52:07] Found exact allele match mycobacteria_2.L16-450
-[09:52:07] Found exact allele match mycobacteria_2.S12-394
-[09:52:07] Found exact allele match mycobacteria_2.L19-11
-[09:52:07] Found exact allele match mycobacteria_2.S19-13
-[09:52:07] Found exact allele match mycobacteria_2.L35-10
-[09:52:07] Found exact allele match mycobacteria_2.S14Z-10
-[09:52:07] If you like MLST, you're going to absolutely love cgMLST!
-[09:52:07] Done.
+[10:00:09] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[10:00:09] Checking mlst dependencies:
+[10:00:09] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[10:00:09] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[10:00:09] Found blastn: 2.15.0+ (002015)
+[10:00:09] Excluding 3 schemes: abaumannii ecoli vcholerae_2
+[10:00:11] Found exact allele match mycobacteria_2.S7-10
+[10:00:11] Found exact allele match mycobacteria_2.L16-450
+[10:00:11] Found exact allele match mycobacteria_2.S12-394
+[10:00:11] Found exact allele match mycobacteria_2.L19-11
+[10:00:11] Found exact allele match mycobacteria_2.S19-13
+[10:00:11] Found exact allele match mycobacteria_2.L35-10
+[10:00:11] Found exact allele match mycobacteria_2.S14Z-10
+[10:00:11] You can use --label XXX to replace an ugly filename in the output.
+[10:00:11] Done.
 
 Antibiotic resistance
 
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
 Found 1 genes in P7741.reordered.fasta
-Tip: remember that abricate is unable to find AMR-mediated SNPs.
+Tip: have a suggestion for abricate? Tell me at https://github.com/tseemann/abricate/issues
 Done.
 #FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
 P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
@@ -631,8 +631,8 @@ gene:4852
 tRNA:43
 tmRNA:1
 rRNA:3
-IS30 family transposase ISMsm8:1
 IS110 family transposase IS117:1
+IS30 family transposase ISMsm8:1
 Insertion_Sequences:2
 Pseudogenes:141</code></pre>
 </div>
@@ -677,22 +677,68 @@ Pseudogenes:141</code></pre>
 </figure>
 </div>
 </section>
-<section id="generate-genome-feature-files" class="level3">
-<h3 class="anchored" data-anchor-id="generate-genome-feature-files">Generate Genome Feature Files</h3>
-<p>using <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a> to run 5 reference genomes Agy99 Liflandii SGL03 Shinsuense H37Rv</p>
+<section id="genome-ring-structures-using-brig" class="level3">
+<h3 class="anchored" data-anchor-id="genome-ring-structures-using-brig">Genome ring structures using BRIG</h3>
+<p>using <a href="https://github.com/happykhan/BRIG" class="uri">https://github.com/happykhan/BRIG</a></p>
+<ul>
+<li><p>BRIG is a standalone interactive application with interface to run BLAST and to render the output as ring structure visualizations.</p></li>
+<li><p>get BRIG-0.95-dist: start with enough RAM, java -Xmx1500M -jar BRIG.jar</p></li>
+<li><p>Needs Genbank formats as generated by prokka (e.g.&nbsp;P7741.gbk).</p>
+<ul>
+<li><p>This required re-running prokka for reference genomes as get_genome_gffs.sh previously deleted the analysis folder after taking gff</p></li>
+<li><p>Now I keep the complete folder for future usage</p></li>
+</ul></li>
+<li><p>The forms in BRIG need acclimatization, but once understood, the tool works is great</p>
+<ul>
+<li><p>the path to BLAST binary folder needs to be set in “Configure BRIG options…”</p>
+<ul>
+<li><p>in this case, pairwise genome blastn jobs are performed</p></li>
+<li><p>compute job progress can be seen in the specified “Output folder”</p>
+<ul>
+<li><p>e.g.&nbsp;WGS_Bacteria/BRIG/Mycobacterium_ulcerans_5g</p></li>
+<li><p>folder I used for the 5 genomes of Mycobacterium ulcerans</p></li>
+</ul></li>
+</ul></li>
+<li><p>it’s useful to set-up a symbolic link at same level as BRIG install to gkb directory</p></li>
+<li><p>extensive image rendering options are available to customize the graphic</p></li>
+</ul></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># takes just over an hour on laptop to </span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># generate gffs for 6 bacterial genomes</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ./get_genome_gffs.sh </span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> gffs <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $5 " " $6 $7 " " $8" " $9}'</span> </span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># find gbks and copy to folder </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># mkdir gbk</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># find . -name "*.gbk" | perl -ne 'chomp ; print "cp $_ gbk/\n"' -</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># could redirect to a shell script, but prefer to develop commands and cut/paste into terminal for short batch processes </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./H37Rv/H37Rv.gbk gbk/</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./SGL03/SGL03.gbk gbk/</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./Shinsuense/Shinsuense.gbk gbk/</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./P7741_annotation/P7741.gbk gbk/</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./Agy99/Agy99.gbk gbk/</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./Liflandii/Liflandii.gbk gbk/</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="img/My_ulcerans_5g.svg"><img src="img/My_ulcerans_5g.png" class="img-fluid" alt="Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version."></a></p>
+</section>
+<section id="generate-genome-feature-files" class="level3">
+<h3 class="anchored" data-anchor-id="generate-genome-feature-files">Generate Genome Feature Files</h3>
+<p>using <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a> to run 5 reference genomes Agy99, Liflandii, SGL03, Shinsuense, H37Rv</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># takes just over an hour on laptop to </span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># generate gffs for 6 bacterial genomes</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ./get_genome_gffs.sh </span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> gffs <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $5 " " $6 $7 " " $8" " $9}'</span> </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
 7.2M Feb28 18:55 Agy99.gff
@@ -704,42 +750,9 @@ Pseudogenes:141</code></pre>
 </div>
 </div>
 </section>
-<section id="genome-ring-structures-using-brig" class="level3">
-<h3 class="anchored" data-anchor-id="genome-ring-structures-using-brig">Genome ring structures using BRIG</h3>
-<p><a href="https://github.com/happykhan/BRIG" class="uri">https://github.com/happykhan/BRIG</a></p>
-<ul>
-<li><p>using BRIG-0.95-dist</p></li>
-<li><p>java -Xmx1500M -jar BRIG.jar</p></li>
-<li><p>needs Genbank formats as generated by prokka e.g.&nbsp;P7741.gbk</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/anaconda3/etc/profile.d/conda.sh</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bacterial-genomics-tutorial-sw7</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># find gbks and copy to folder </span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># mkdir gbk</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># find . -name "*.gbk" | perl -ne 'chomp ; print "cp $_ gbk/\n"' -</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./H37Rv/H37Rv.gbk gbk/</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./SGL03/SGL03.gbk gbk/</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./Shinsuense/Shinsuense.gbk gbk/</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./P7741_annotation/P7741.gbk gbk/</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./Agy99/Agy99.gbk gbk/</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./Liflandii/Liflandii.gbk gbk/</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/output_Liflandii.gbk.jpg" class="img-fluid figure-img"></p>
-<figcaption>Test output from BRIG</figcaption>
-</figure>
-</div>
-</section>
 <section id="generate-pangenome" class="level3">
 <h3 class="anchored" data-anchor-id="generate-pangenome">Generate Pangenome</h3>
-<p>Roary is a high speed stand alone pan genome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.</p>
+<p>Roary is a high speed stand alone pangenome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.</p>
 <p>using</p>
 <ul>
 <li><p>roary and roary_plots.py <a href="https://sanger-pathogens.github.io/Roary/" class="uri">https://sanger-pathogens.github.io/Roary/</a></p>
