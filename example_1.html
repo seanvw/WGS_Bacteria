@@ -153,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#enter-conda-env-data-download-qc-reports" id="toc-enter-conda-env-data-download-qc-reports" class="nav-link active" data-scroll-target="#enter-conda-env-data-download-qc-reports">Enter Conda env, data download, QC reports</a></li>
+  <li><a href="#conda-env-data-download-qc-reports" id="toc-conda-env-data-download-qc-reports" class="nav-link active" data-scroll-target="#conda-env-data-download-qc-reports">Conda env, data download, QC reports</a></li>
   <li><a href="#trimming-and-post-trim-qc-reports" id="toc-trimming-and-post-trim-qc-reports" class="nav-link" data-scroll-target="#trimming-and-post-trim-qc-reports">Trimming and post trim QC reports</a></li>
   <li><a href="#assembly" id="toc-assembly" class="nav-link" data-scroll-target="#assembly">Assembly</a></li>
   <li><a href="#polishing" id="toc-polishing" class="nav-link" data-scroll-target="#polishing">Polishing</a></li>
@@ -198,11 +198,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In short, a complete workflow from reads to genome, through annotation and comparative genomics.</p>
+<p>In short, a complete workflow from Illumina reads to genome assembly, through annotation and comparative genomics.</p>
 <p>This example uses just the Illumina data (<a href="https://www.ebi.ac.uk/ena/browser/view/ERR3335404" class="uri">https://www.ebi.ac.uk/ena/browser/view/ERR3335404</a>) generated for the study “<em>Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate</em>” (<a href="https://www.ebi.ac.uk/ena/browser/view/PRJEB30628" class="uri">https://www.ebi.ac.uk/ena/browser/view/PRJEB30628</a>), “P7741” as a short identity code. <em>Mycobacterium ulcerans</em> is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.</p>
-<p>One reference genome paper is “<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3554023/">Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii</a>” and it’s sequence <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_020133" class="uri">https://www.ncbi.nlm.nih.gov/nuccore/NC_020133</a>. <em>Mycobacterium ulcerans liflandii 128FXT</em>, complete sequence has NCBI Reference Sequence: NC_020133.1 and is refered to as just “Liflandii” (sequence stored as ./genomes/Liflandii.fasta). Other reference genomes of <em>Mycobacterium ulcerans</em> are utilized in the workflow (Agy99, SGL03 and Shinsuense) and one of <em>Mycobacterium tuberculosis</em> (H37Rv).This work is based on the excellent presentations and analysis demonstrated by Vincent Appiah (vincentappiah, <a href="https://www.youtube.com/watch?v=S_sRo_85jhs&amp;list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd">link</a>) and Daren Ginete (<a href="https://www.youtube.com/watch?v=CTugtM1LR0M">link</a>). The work has been reproduced, adapted and extended in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability.</p>
-<section id="enter-conda-env-data-download-qc-reports" class="level2">
-<h2 class="anchored" data-anchor-id="enter-conda-env-data-download-qc-reports">Enter Conda env, data download, QC reports</h2>
+<p>One reference genome paper is “<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3554023/">Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii</a>” and it’s sequence <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_020133" class="uri">https://www.ncbi.nlm.nih.gov/nuccore/NC_020133</a>. <em>Mycobacterium ulcerans liflandii 128FXT</em>, complete sequence has NCBI Reference Sequence: NC_020133.1 and is refered to as just “Liflandii” (sequence stored as ./genomes/Liflandii.fasta). Other reference genomes of <em>Mycobacterium ulcerans</em> are utilized in the workflow (Agy99, SGL03 and Shinsuense) and one of <em>Mycobacterium tuberculosis</em> (H37Rv). This work is based upon the excellent presentations and analysis demonstrated by Vincent Appiah (vincentappiah, <a href="https://www.youtube.com/watch?v=S_sRo_85jhs&amp;list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd">link</a>) and Daren Ginete (<a href="https://www.youtube.com/watch?v=CTugtM1LR0M">link</a>). The work has been reproduced, adapted and extended in order that it works on a Mac laptop with updated versions of analysis software available in February 2024 and using the Quarto package for presentation and re-usability.</p>
+<section id="conda-env-data-download-qc-reports" class="level2">
+<h2 class="anchored" data-anchor-id="conda-env-data-download-qc-reports">Conda env, data download, QC reports</h2>
 <p>download data and QC of raw Illumina with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" title="fastqc">fastqc</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use clean install of conda on machine in private space </span></span>
@@ -235,7 +235,13 @@ for_drep                 /Users/sw/anaconda3/envs/for_drep
 just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 </div>
 </div>
-<p>Results files are QC html reports</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fastqc_eg1.png" class="img-fluid figure-img" width="800"></p>
+<figcaption>Click on links to get the full reports</figcaption>
+</figure>
+</div>
+<p>Results files are QC html reports.</p>
 <p><a href="./QC_RAW_READS/P7741_R1_fastqc.html">./QC_RAW_READS/P7741_R1_fastqc.html</a></p>
 <p><a href="./QC_RAW_READS/P7741_R1_fastqc.html">./QC_RAW_READS/P7741_R2_fastqc.html</a></p>
 </section>
@@ -299,9 +305,24 @@ P7741_unpaired_R2_fastqc.zip</code></pre>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># and re-run if needed</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ~/SPAdes-3.15.5-Darwin/bin/spades.py --careful -o P7741_SPADES_OUT -1 trimmed_reads/P7741_R1.fastq.gz -2 trimmed_reads/P7741_R2.fastq.gz</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> P7741_SPADES_OUT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"number of contigs"</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">'&gt;'</span> P7741_SPADES_OUT/contigs.fasta <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"number of scaffolds"</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">'&gt;'</span> P7741_SPADES_OUT/scaffolds.fasta <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"directory listing"</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> P7741_SPADES_OUT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>K21
+<pre><code>number of contigs
+    3243
+
+number of scaffolds
+    3232
+
+directory listing
+K21
 K33
 K55
 K77
@@ -444,13 +465,16 @@ transposed_report.txt</code></pre>
 </div>
 <section id="quality-assessment-tool-for-genome-assemblies-quast" class="level3">
 <h3 class="anchored" data-anchor-id="quality-assessment-tool-for-genome-assemblies-quast">Quality Assessment Tool for Genome Assemblies (QUAST)</h3>
+<p><a href="QC_ASSEMBLY/report.html"><img src="img/quast_eg1.png" class="img-fluid" width="800" alt="QUAST view. Click on link to get interactive html report."></a></p>
 <p><a href="QC_ASSEMBLY/report.html">QC_ASSEMBLY/report.html</a></p>
 </section>
 <section id="icarus-quast-contig-browser" class="level3">
 <h3 class="anchored" data-anchor-id="icarus-quast-contig-browser">Icarus QUAST Contig Browser</h3>
 <p><a href="QC_ASSEMBLY/icarus.html" title="QC_ASSEMBLY/icarus.html">QC_ASSEMBLY/icarus.html</a></p>
 <p><a href="QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html">QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html</a></p>
+<p><a href="QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html"><img src="img/icarus_eg1.png" class="img-fluid" width="800" alt="ICARUS view. Click on link or the image to get the interactive reports."></a></p>
 <p><a href="QC_ASSEMBLY/icarus_viewers/alignment_viewer.html" title="QC_ASSEMBLY/icarus_viewers/alignment_viewer.html">QC_ASSEMBLY/icarus_viewers/alignment_viewer.html</a></p>
+<p><a href="QC_ASSEMBLY/icarus_viewers/alignment_viewer.html"><img src="img/icarus_eg2.png" class="img-fluid" width="800" alt="ICARUS view. Click on link or the image to get the interactive reports."></a></p>
 </section>
 </section>
 <section id="reorder-contigs" class="level2">
@@ -522,28 +546,28 @@ draft genome sequence extracted</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Alleles
 
-[10:00:09] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[10:00:09] Checking mlst dependencies:
-[10:00:09] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[10:00:09] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[10:00:09] Found blastn: 2.15.0+ (002015)
-[10:00:09] Excluding 3 schemes: abaumannii ecoli vcholerae_2
-[10:00:11] Found exact allele match mycobacteria_2.S7-10
-[10:00:11] Found exact allele match mycobacteria_2.L16-450
-[10:00:11] Found exact allele match mycobacteria_2.S12-394
-[10:00:11] Found exact allele match mycobacteria_2.L19-11
-[10:00:11] Found exact allele match mycobacteria_2.S19-13
-[10:00:11] Found exact allele match mycobacteria_2.L35-10
-[10:00:11] Found exact allele match mycobacteria_2.S14Z-10
-[10:00:11] You can use --label XXX to replace an ugly filename in the output.
-[10:00:11] Done.
+[12:18:48] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[12:18:48] Checking mlst dependencies:
+[12:18:48] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[12:18:48] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[12:18:48] Found blastn: 2.15.0+ (002015)
+[12:18:48] Excluding 3 schemes: vcholerae_2 abaumannii ecoli
+[12:18:50] Found exact allele match mycobacteria_2.S7-10
+[12:18:50] Found exact allele match mycobacteria_2.L16-450
+[12:18:50] Found exact allele match mycobacteria_2.S12-394
+[12:18:50] Found exact allele match mycobacteria_2.L19-11
+[12:18:50] Found exact allele match mycobacteria_2.S19-13
+[12:18:50] Found exact allele match mycobacteria_2.L35-10
+[12:18:50] Found exact allele match mycobacteria_2.S14Z-10
+[12:18:50] If you like MLST, you're going to absolutely love cgMLST!
+[12:18:50] Done.
 
 Antibiotic resistance
 
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
 Found 1 genes in P7741.reordered.fasta
-Tip: have a suggestion for abricate? Tell me at https://github.com/tseemann/abricate/issues
+Tip: the --fofn option allows you to feed in a big list of files to run on.
 Done.
 #FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
 P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
@@ -563,17 +587,83 @@ P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ====
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ran is around 10 minutes with 4 cores</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># show some pseudogenes</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./get_pseudo.pl</span> P7741_annotation/P7741.faa <span class="op">&gt;</span> P7741_annotation/P7741.pseudo.txt</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-50</span> P7741_annotation/P7741.pseudo.txt</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># get some counts of genome features</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># vincentappiah numbers differ for reason speculated over in above sections</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> get_annot_stats.py P7741_annotation P7741</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># stats</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Summary"</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> P7741_annotation/P7741.txt </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># get some counts of genome features</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># vincentappiah numbers differ for reason speculated over in above sections</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Another bespoke summary"</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> get_annot_stats.py P7741_annotation P7741</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># show first 3 protein sequences</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"First 3 protein sequences"</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-13</span> P7741_annotation/P7741.faa</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># show some 3 genes/CDS</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"First 3 genes / CDS"</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-7</span> P7741_annotation/P7741.tsv</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co"># show some pseudogenes</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Some pseudogenes"</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="ex">./get_pseudo.pl</span> P7741_annotation/P7741.faa <span class="op">&gt;</span> P7741_annotation/P7741.pseudo.txt</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-10</span> P7741_annotation/P7741.pseudo.txt</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"...."</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Found 4805 genes.
+<pre><code>Summary
+organism: Genus species strain 
+contigs: 1
+bases: 5012494
+CDS: 4805
+gene: 4852
+rRNA: 3
+tRNA: 43
+tmRNA: 1
+
+Another bespoke summary
+Counting Annotated Features.............................
+CDS:4805
+gene:4852
+tRNA:43
+tmRNA:1
+rRNA:3
+IS30 family transposase ISMsm8:1
+IS110 family transposase IS117:1
+Insertion_Sequences:2
+Pseudogenes:141
+
+First 3 protein sequences
+&gt;P7741_00001 Anti-sigma-M factor RsmA
+MHITVSTPPPVIPLSHDQVLDLLQRAPDYGPFADPSRRASCLNGLGYPASTPILGAQPVD
+INARPGVLLVLAGDAPADLAVYAVALNCSAADTGLLASTTLPRLPDS
+&gt;P7741_00002 Thioredoxin reductase
+MTTDSSADATIHDVIVIGSGPAGYTAALYTARAQLAPLVFEGTSFGGALMTTTEVENYPG
+FREGITGPELMDEMREQALRFGADLRMEDVQSVSLDGPIKSVVTSDGETHRARAVILAMG
+AAARYLHVPGEQELLGRGVSSCATCDGFFFRDQDIAVIGGGDSAMEEATFLTRFARSVTL
+VHRRDEFRASKIMINRAQANDKIRILTNKIVLAVDGETTVTGLQLRDTVTGEETTLPVTG
+VFVAIGHEPRSSLVRDAVDVDPDGYVLVNGRTTGTSLEGVFAAGDLVDRTYRQAVTAAGS
+GCAAAIDAERWLAEHEATGDADSTDTLIGAQQ
+&gt;P7741_00003 Thioredoxin
+MTDSEKSSATIEVSDASFSTEVLSSNKPVLVDFWATWCGPCKMVAPVLEEIATERADNLT
+VAKLDVDANPETARNFQVVSIPTMILFKDGEPVKRIVGAKGKAALLRELSDAVPNLG
+
+First 3 genes / CDS
+locus_tag   ftype   length_bp   gene    EC_number   COG product
+P7741_00001 gene    324 rsmA_1          
+P7741_00001 CDS 324 rsmA_1          Anti-sigma-M factor RsmA
+P7741_00002 gene    999 trxB_1          
+P7741_00002 CDS 999 trxB_1  1.8.1.9 COG0492 Thioredoxin reductase
+P7741_00003 gene    354 trxA            
+P7741_00003 CDS 354 trxA        COG0526 Thioredoxin
+
+Some pseudogenes
+Found 4805 genes.
 Found 141 potential psuedo-genes
 P7741_00021 &amp; P7741_00022 =&gt; HTH-type transcriptional activator TipA
 P7741_00062 &amp; P7741_00063 =&gt; putative protein
@@ -585,56 +675,7 @@ P7741_00276 &amp; P7741_00277 =&gt; putative monooxygenase
 P7741_00279 &amp; P7741_00280 =&gt; Putative citrate synthase 2
 P7741_00281 &amp; P7741_00282 =&gt; Sphingomyelinase
 P7741_00293 &amp; P7741_00294 =&gt; putative protein
-P7741_00294 &amp; P7741_00295 =&gt; putative protein
-P7741_00326 &amp; P7741_00327 =&gt; putative protein
-P7741_00374 &amp; P7741_00375 =&gt; Creatinase
-P7741_00383 &amp; P7741_00384 =&gt; S-sulfocysteine synthase
-P7741_00386 &amp; P7741_00387 =&gt; Multicopper oxidase MmcO
-P7741_00393 &amp; P7741_00394 =&gt; 2,3-dihydroxyphenylpropionate/2,3-dihydroxicinnamic acid 1,2-dioxygenase
-P7741_00416 &amp; P7741_00417 =&gt; Methylmalonyl-CoA mutase
-P7741_00502 &amp; P7741_00503 =&gt; Isoniazid-induced protein IniC
-P7741_00512 &amp; P7741_00513 =&gt; L-asparagine permease 2
-P7741_00543 &amp; P7741_00544 =&gt; Putrescine importer PuuP
-P7741_00583 &amp; P7741_00584 =&gt; putative protein
-P7741_00746 &amp; P7741_00747 =&gt; Putative S-adenosyl-L-methionine-dependent methyltransferase
-P7741_00747 &amp; P7741_00748 =&gt; Putative S-adenosyl-L-methionine-dependent methyltransferase
-P7741_00758 &amp; P7741_00759 =&gt; Putative S-adenosyl-L-methionine-dependent methyltransferase
-P7741_00790 &amp; P7741_00791 =&gt; putative cutinase cut3
-P7741_00836 &amp; P7741_00837 =&gt; Cholesterol oxidase
-P7741_00856 &amp; P7741_00857 =&gt; Putative diacyglycerol O-acyltransferase
-P7741_00858 &amp; P7741_00859 =&gt; Error-prone DNA polymerase
-P7741_01064 &amp; P7741_01065 =&gt; Putative diacyglycerol O-acyltransferase
-P7741_01075 &amp; P7741_01076 =&gt; Geranial dehydrogenase
-P7741_01127 &amp; P7741_01128 =&gt; Nitrate/nitrite transporter NarK
-P7741_01183 &amp; P7741_01184 =&gt; Flavin-dependent tryptophan halogenase RebH
-P7741_01266 &amp; P7741_01267 =&gt; putative protein
-P7741_01271 &amp; P7741_01272 =&gt; Putative diacyglycerol O-acyltransferase
-P7741_01343 &amp; P7741_01344 =&gt; putative cobalt/nickel-exporting P-type ATPase
-P7741_01345 &amp; P7741_01346 =&gt; Putative thioredoxin 2
-P7741_01400 &amp; P7741_01401 =&gt; Putative acyltransferase plsB1
-P7741_01418 &amp; P7741_01419 =&gt; putative protein
-P7741_01508 &amp; P7741_01509 =&gt; Phenolphthiocerol synthesis polyketide synthase type I Pks15/1
-P7741_01509 &amp; P7741_01510 =&gt; Phenolphthiocerol synthesis polyketide synthase type I Pks15/1
-P7741_01560 &amp; P7741_01561 =&gt; Carboxylic acid reductase
-P7741_01581 &amp; P7741_01582 =&gt; putative protein
-P7741_01582 &amp; P7741_01583 =&gt; putative protein
-P7741_01590 &amp; P7741_01591 =&gt; putative protein
-P7741_01591 &amp; P7741_01592 =&gt; putative protein
-P7741_01639 &amp; P7741_01640 =&gt; Carboxylesterase NlhH
-P7741_01663 &amp; P7741_01664 =&gt; Putative diacyglycerol O-acyltransferase
-P7741_01668 &amp; P7741_01669 =&gt; Esterase PE16
-P7741_01690 &amp; P7741_01691 =&gt; Glucose-6-phosphate 1-dehydrogenase 2
-P7741_01828 &amp; P7741_01829 =&gt; putative transport protein MmpL1
-Counting Annotated Features.............................
-CDS:4805
-gene:4852
-tRNA:43
-tmRNA:1
-rRNA:3
-IS110 family transposase IS117:1
-IS30 family transposase ISMsm8:1
-Insertion_Sequences:2
-Pseudogenes:141</code></pre>
+....</code></pre>
 </div>
 </div>
 </section>
@@ -666,13 +707,13 @@ Pseudogenes:141</code></pre>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/cluster1.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="img/cluster1.png" class="img-fluid figure-img" width="800"></p>
 <figcaption>fastANI cluster: just the <em>Mycobacterium ulcerans</em> genomes</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/cluster2.png" class="img-fluid figure-img" width="700"></p>
+<p><img src="img/cluster2.png" class="img-fluid figure-img" width="800"></p>
 <figcaption>MASH cluster: H37Rv (green label - hard to read in image) is <em>Mycobacterium tuberculosis</em> and is clearly very different, an outlier with respect to ANI, to the <em>Mycobacterium ulcerans</em> genomes.</figcaption>
 </figure>
 </div>
@@ -721,7 +762,14 @@ Pseudogenes:141</code></pre>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><a href="img/My_ulcerans_5g.svg"><img src="img/My_ulcerans_5g.png" class="img-fluid" alt="Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version."></a></p>
+<ul>
+<li>Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version.</li>
+</ul>
+<p><a href="img/My_ulcerans_5g.svg"><img src="img/My_ulcerans_5g.png" class="img-fluid" width="800" alt="Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version."></a></p>
+<ul>
+<li>Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version.</li>
+</ul>
+<p><a href="img/ulcerans_vs_tuberculosis.svg"><img src="img/ulcerans_vs_tuberculosis.png" class="img-fluid" width="800" alt="Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version."></a></p>
 </section>
 <section id="generate-genome-feature-files" class="level3">
 <h3 class="anchored" data-anchor-id="generate-genome-feature-files">Generate Genome Feature Files</h3>
@@ -844,7 +892,7 @@ Total genes (0% &lt;= strains &lt;= 100%) 11935</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/P7741_Agy99_Liflandii.png" class="img-fluid figure-img"></p>
-<figcaption>Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733) Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144.</figcaption>
+<figcaption>Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733). Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
