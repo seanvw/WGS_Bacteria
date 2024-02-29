@@ -2,13 +2,13 @@
 title: "Example #1"
 ---
 
-This example uses just the Illumina data (<https://www.ebi.ac.uk/ena/browser/view/ERR3335404>) generated for the study "*Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate*" (<https://www.ebi.ac.uk/ena/browser/view/PRJEB30628>). Mycobacterium ulcerans is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.
+In short, a complete workflow from Illumina reads to genome assembly, through annotation and comparative genomics.
 
-The reference genome paper is "[Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3554023/)" and it's sequence <https://www.ncbi.nlm.nih.gov/nuccore/NC_020133>. Mycobacterium liflandii 128FXT, complete sequence NCBI Reference Sequence: NC_020133.1
+This example uses just the Illumina data (<https://www.ebi.ac.uk/ena/browser/view/ERR3335404>) generated for the study "*Whole genome sequence of Mycobacterium ulcerans CSURP7741, a French Guyana clinical isolate*" (<https://www.ebi.ac.uk/ena/browser/view/PRJEB30628>), "P7741" as a short identity code. *Mycobacterium ulcerans* is an environmental non-tuberculous mycobacterium responsible for Buruli ulcer.
 
-This work is based on the excellent presentation and analysis as instructed by vincentappiah [video](https://www.youtube.com/watch?v=S_sRo_85jhs&list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd). The work has been reproduced and adapted in order that it works on a Mac laptop with updated versions of analysis software available in 2024 and using the Quarto package for presentation and re-usability.
+One reference genome paper is "[Complete genome sequence of the frog pathogen Mycobacterium ulcerans ecovar Liflandii](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3554023/)" and it's sequence <https://www.ncbi.nlm.nih.gov/nuccore/NC_020133>. *Mycobacterium ulcerans liflandii 128FXT*, complete sequence has NCBI Reference Sequence: NC_020133.1 and is refered to as just "Liflandii" (sequence stored as ./genomes/Liflandii.fasta). Other reference genomes of *Mycobacterium ulcerans* are utilized in the workflow (Agy99, SGL03 and Shinsuense) and one of *Mycobacterium tuberculosis* (H37Rv). This work is based upon the excellent presentations and analysis demonstrated by Vincent Appiah (vincentappiah, [link](https://www.youtube.com/watch?v=S_sRo_85jhs&list=PLe1-kjuYBZ06-7O8eeqLoFsGQYGFbytzd)) and Daren Ginete ([link](https://www.youtube.com/watch?v=CTugtM1LR0M)). The work has been reproduced, adapted and extended in order that it works on a Mac laptop with updated versions of analysis software available in February 2024 and using the Quarto package for presentation and re-usability.
 
-## Enter Conda env, data download, QC reports
+## Conda env, data download, QC reports
 
 download data and QC of raw Illumina with [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/ "fastqc")
 
@@ -29,7 +29,9 @@ conda activate bacterial-genomics-tutorial-sw7
 conda deactivate
 ```
 
-Results files are QC html reports
+![Click on links to get the full reports](img/fastqc_eg1.png){width="800"}
+
+Results files are QC html reports.
 
 [./QC_RAW_READS/P7741_R1_fastqc.html](./QC_RAW_READS/P7741_R1_fastqc.html)
 
@@ -92,6 +94,14 @@ using [SPAdes - St. Petersburg genome assembler (SPAdes)](https://github.com/abl
 # and re-run if needed
 # ~/SPAdes-3.15.5-Darwin/bin/spades.py --careful -o P7741_SPADES_OUT -1 trimmed_reads/P7741_R1.fastq.gz -2 trimmed_reads/P7741_R2.fastq.gz
 
+echo "number of contigs"
+grep '>' P7741_SPADES_OUT/contigs.fasta | wc -l
+echo ""
+echo "number of scaffolds"
+grep '>' P7741_SPADES_OUT/scaffolds.fasta | wc -l
+echo ""
+
+echo "directory listing"
 ls -1 P7741_SPADES_OUT
 
 ```
@@ -156,6 +166,8 @@ conda deactivate
 
 ### Quality Assessment Tool for Genome Assemblies (QUAST)
 
+[![QUAST view. Click on link to get interactive html report.](img/quast_eg1.png){width="800"}](QC_ASSEMBLY/report.html)
+
 [QC_ASSEMBLY/report.html](QC_ASSEMBLY/report.html)
 
 ### Icarus QUAST Contig Browser
@@ -164,7 +176,11 @@ conda deactivate
 
 [QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html](QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html)
 
+[![ICARUS view. Click on link or the image to get the interactive reports.](img/icarus_eg1.png){width="800"}](QC_ASSEMBLY/icarus_viewers/contig_size_viewer.html)
+
 [QC_ASSEMBLY/icarus_viewers/alignment_viewer.html](QC_ASSEMBLY/icarus_viewers/alignment_viewer.html "QC_ASSEMBLY/icarus_viewers/alignment_viewer.html")
+
+[![ICARUS view. Click on link or the image to get the interactive reports.](img/icarus_eg2.png){width="800"}](QC_ASSEMBLY/icarus_viewers/alignment_viewer.html)
 
 ## Reorder contigs
 
@@ -243,13 +259,32 @@ cpus=4
 # ran is around 10 minutes with 4 cores
 #prokka --cpus $cpus --kingdom Bacteria --locustag P7741 --outdir P7741_annotation --prefix P7741 --addgenes P7741.reordered.fasta
 
-# show some pseudogenes
-./get_pseudo.pl P7741_annotation/P7741.faa > P7741_annotation/P7741.pseudo.txt
-head -50 P7741_annotation/P7741.pseudo.txt
+# stats
+echo "Summary"
+cat P7741_annotation/P7741.txt 
+echo ""
 
 # get some counts of genome features
 # vincentappiah numbers differ for reason speculated over in above sections
+echo "Another bespoke summary"
 python get_annot_stats.py P7741_annotation P7741
+echo ""
+
+# show first 3 protein sequences
+echo "First 3 protein sequences"
+head -13 P7741_annotation/P7741.faa
+echo ""
+
+# show some 3 genes/CDS
+echo "First 3 genes / CDS"
+head -7 P7741_annotation/P7741.tsv
+echo ""
+
+# show some pseudogenes
+echo "Some pseudogenes"
+./get_pseudo.pl P7741_annotation/P7741.faa > P7741_annotation/P7741.pseudo.txt
+head -10 P7741_annotation/P7741.pseudo.txt
+echo "...."
 
 conda deactivate
 
@@ -285,13 +320,71 @@ conda deactivate
 
 -   Cluster of P7741/Liflandii/Shinsuense is different between methods ANI methods but agreement with the distinction of SGL03 and Agy99 that are approaching 100% Average Nucleotide Identity.
 
-![fastANI cluster: just the *Mycobacterium ulcerans* genomes](img/cluster1.png){width="500"}
+![fastANI cluster: just the *Mycobacterium ulcerans* genomes](img/cluster1.png){width="800"}
 
-![MASH cluster: H37Rv (green label - hard to read in image) is *Mycobacterium tuberculosis* and is clearly very different, an outlier with respect to ANI, to the *Mycobacterium ulcerans* genomes.](img/cluster2.png){width="700"}
+![MASH cluster: H37Rv (green label - hard to read in image) is *Mycobacterium tuberculosis* and is clearly very different, an outlier with respect to ANI, to the *Mycobacterium ulcerans* genomes.](img/cluster2.png){width="800"}
+
+### Genome ring structures using BRIG
+
+using <https://github.com/happykhan/BRIG>
+
+-   BRIG is a standalone interactive application with interface to run BLAST and to render the output as ring structure visualizations.
+
+-   get BRIG-0.95-dist: start with enough RAM, java -Xmx1500M -jar BRIG.jar
+
+-   Needs Genbank formats as generated by prokka (e.g. P7741.gbk).
+
+    -   This required re-running prokka for reference genomes as get_genome_gffs.sh previously deleted the analysis folder after taking gff
+
+    -   Now I keep the complete folder for future usage
+
+-   The forms in BRIG need acclimatization, but once understood, the tool works is great
+
+    -   the path to BLAST binary folder needs to be set in "Configure BRIG options..."
+
+        -   in this case, pairwise genome blastn jobs are performed
+
+        -   compute job progress can be seen in the specified "Output folder"
+
+            -   e.g. WGS_Bacteria/BRIG/Mycobacterium_ulcerans_5g
+
+            -   folder I used for the 5 genomes of Mycobacterium ulcerans
+
+    -   it's useful to set-up a symbolic link at same level as BRIG install to gkb directory
+
+    -   extensive image rendering options are available to customize the graphic
+
+```{zsh}
+# conda 
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate bacterial-genomics-tutorial-sw7
+
+# find gbks and copy to folder 
+# mkdir gbk
+# find . -name "*.gbk" | perl -ne 'chomp ; print "cp $_ gbk/\n"' -
+# could redirect to a shell script, but prefer to develop commands and cut/paste into terminal for short batch processes 
+cp ./H37Rv/H37Rv.gbk gbk/
+cp ./SGL03/SGL03.gbk gbk/
+cp ./Shinsuense/Shinsuense.gbk gbk/
+cp ./P7741_annotation/P7741.gbk gbk/
+cp ./Agy99/Agy99.gbk gbk/
+cp ./Liflandii/Liflandii.gbk gbk/
+  
+conda deactivate
+
+```
+
+-   Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version.
+
+[![Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version.](img/My_ulcerans_5g.png){width="800"}](img/My_ulcerans_5g.svg)
+
+-   Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version.
+
+[![Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version.](img/ulcerans_vs_tuberculosis.png){width="800"}](img/ulcerans_vs_tuberculosis.svg)
 
 ### Generate Genome Feature Files
 
-using <https://github.com/tseemann/prokka> to run 5 reference genomes Agy99 Liflandii SGL03 Shinsuense H37Rv
+using <https://github.com/tseemann/prokka> to run 5 reference genomes Agy99, Liflandii, SGL03, Shinsuense, H37Rv
 
 ```{zsh}
 # conda 
@@ -309,21 +402,9 @@ conda deactivate
 
 ```
 
-### Genome ring structures using BRIG
-
-<https://github.com/happykhan/BRIG>
-
-BRIG-0.95-distjava -Xmx1500M -jar BRIG.jar
-
-needs Genbank formats as generated by prokka e.g. P7741.gbk
-
-but, these were deleted by the get_genome_gffs.sh script that used prokka
-
-need to re-run with delete turned off... later...
-
 ### Generate Pangenome
 
-Roary is a high speed stand alone pan genome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.
+Roary is a high speed stand alone pangenome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.
 
 using
 
@@ -380,18 +461,20 @@ conda deactivate
 
 ```
 
+![A sample of genes_presence_absense.csv where number of present = 5 genomes](img/genes_presence_absense_eg.png)
+
 ![Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between \>= 99% similarity).](img/pangenome_matrix.png){width="5100"}
 
 ![Pangenome Frequency.](img/pangenome_frequency.png){width="1050"}
 
-![Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733) Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144.](img/P7741_Agy99_Liflandii.png)
+![Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733). Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144.](img/P7741_Agy99_Liflandii.png)
 
 ![Genes unique to the set P7741, H37Rv, Liflandii (5169 = 390 + 0 + 3904 + 141 + 1 + 0 + 733).](img/P7741_H37Rv_Liflandii.png)
 
-## Strange bug
+## Bug note
 
 ```{r}
 # With Quarto, the strange bug means that if an {r} executable block is included
-# then the preceding {bash} blocks are executed, otherwise not!
+# then the preceding {zsh} or {bash} blocks are executed, otherwise not!
 # Simply include this and all is executed as desired.
 ```

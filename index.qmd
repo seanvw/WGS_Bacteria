@@ -2,9 +2,6 @@
 title: "WGS Bacteria"
 ---
 
-## Introduction 
+## Introduction
 
-Some minimal text for the moment
-
-
-
+A place to look at pragmatic aspects of Whole Genome Sequence (WGS) analysis with bacterial genomes. The examples are based upon openly available data and software. Building on my previous experience in genomics, this updated hands-on practice reminds that this computational domain requires a plethora of diverse tools and documentation from globally distributed research groups and individuals (crucial contributions to the community) and calls upon a blend of bioinformatics and system administration understanding. System administration aspects are noted in "Set Up Notes". All computations were possible using a rather humble computational server: my Mac laptop was suprisingly capable (a testament to optimized algorithms?!) with these relatively small genomes.

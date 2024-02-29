@@ -10,6 +10,7 @@ for genome in Agy99 Liflandii SGL03 Shinsuense H37Rv
 do
 prokka --cpus $cpus --kingdom Bacteria --locustag ${genome} --addgenes --prefix ${genome} genomes/${genome}.fasta
 cp ${genome}/${genome}.gff gffs/
+# do not delete - we need the .gbk file for BRIG
 # rm -fr ${genome}
 done
 
