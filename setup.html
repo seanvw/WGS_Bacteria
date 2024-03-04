@@ -439,16 +439,16 @@ just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># then symbolic link the latest version to pilon.jar</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'Directory listing: '</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="kw">|</span> <span class="fu">perl</span> <span class="at">-nae</span> <span class="st">'print "@F[0,4..8]\n"'</span></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>mkdir: apps: File exists
 pilon-1.24.jar file exists.
 Directory listing: 
-total 35992
--rw-r--r--  1 sw  staff   7387440 Dec  8  2021 pilon-1.23.jar
--rw-r--r--  1 sw  staff  11034933 Dec  8  2021 pilon-1.24.jar
-lrwxr-xr-x  1 sw  staff        14 Feb 25 14:27 pilon.jar -&gt; pilon-1.24.jar</code></pre>
+total     
+-rw-r--r-- 7387440 Dec 8 2021 pilon-1.23.jar
+-rw-r--r-- 11034933 Dec 8 2021 pilon-1.24.jar
+lrwxr-xr-x 14 Feb 25 14:27 pilon.jar</code></pre>
 </div>
 </div>
 </section>
