@@ -1,0 +1,27 @@
+---
+title: "Example #2"
+---
+
+..template..to be continued.
+
+## Section 1
+
+```{zsh}
+# use clean install of conda on machine in private space 
+source ~/anaconda3/etc/profile.d/conda.sh
+conda -V
+# all those envs explained on Set Up page
+conda activate bacterial-genomics-tutorial-sw7
+conda deactivate
+```
+
+## Section 2
+
+
+## Bug note
+
+```{r}
+# With Quarto, the strange bug means that if an {r} executable block is included
+# then the preceding {zsh} or {bash} blocks are executed, otherwise not!
+# Simply include this and all is executed as desired.
+```

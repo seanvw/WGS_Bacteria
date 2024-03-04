@@ -11,6 +11,8 @@ website:
         text: About
       - href: example_1.qmd
         text: 'Example #1' 
+      - href: example_2.qmd
+        text: 'Example #2' 
       - href: setup.qmd
         text: 'Set Up' 
 

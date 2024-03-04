@@ -228,7 +228,7 @@ conda deactivate
 ```{bash}
 # need pilon
 # quick and dirty way
-# TODO: paranmeterise and check for latest version
+# TO DO: paranmeterise and check for latest version
 mkdir apps
 cd apps
 if [ -f pilon-1.24.jar ]; then
@@ -248,11 +248,11 @@ cd ..
 
 ```{r}
 # R test - a good rational approximation to a math joke
+# Used to test whether R is working i.e. do something simple test
 message(paste0("Rough Pie: ", 355/113, "\n",
                " Real Pi : ", pi))
-# And the bizarre thing is, if I remove this joke block
+# The bizarre thing is, if I remove this block
 # the bash above does not execute
 # Actually an empty {r} block is sufficient as tested with Example #1
-# go figure!! makes no sense
-# Seems like a Quarto bug
+# Go figure!! Makes no sense. Seems like a Quarto bug
 ```

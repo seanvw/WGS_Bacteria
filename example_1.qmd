@@ -26,6 +26,10 @@ conda activate bacterial-genomics-tutorial-sw7
 # run fastqc
 # mkdir QC_RAW_READS
 # fastqc data/*.fastq.gz -o QC_RAW_READS
+
+# show the raw data
+ls -lh data/ | perl -nae 'print "@F[4..8]\n"'
+
 conda deactivate
 ```
 
@@ -378,7 +382,7 @@ conda deactivate
 
 [![Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version.](img/My_ulcerans_5g.png){width="800"}](img/My_ulcerans_5g.svg)
 
--   Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version.
+-   Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis (var. H37Rv). Click on image gets the SVG version.
 
 [![Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version.](img/ulcerans_vs_tuberculosis.png){width="800"}](img/ulcerans_vs_tuberculosis.svg)
 
@@ -403,8 +407,6 @@ conda deactivate
 ```
 
 ### Generate Pangenome
-
-Roary is a high speed stand alone pangenome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.
 
 using
 
@@ -463,13 +465,13 @@ conda deactivate
 
 ![A sample of genes_presence_absense.csv where number of present = 5 genomes](img/genes_presence_absense_eg.png)
 
-![Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between \>= 99% similarity).](img/pangenome_matrix.png){width="5100"}
+[![Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between \>= 99% similarity). A click on the image gets the scalable SVG version.](img/pangenome_matrix.png){width="5100"}](img/pangenome_matrix.svg)
 
 ![Pangenome Frequency.](img/pangenome_frequency.png){width="1050"}
 
-![Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733). Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144.](img/P7741_Agy99_Liflandii.png)
+![Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733). Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144. Seems like P7741 and Liflandii are phylogenetically closer than to each other than to Agy99.](img/P7741_Agy99_Liflandii.png)
 
-![Genes unique to the set P7741, H37Rv, Liflandii (5169 = 390 + 0 + 3904 + 141 + 1 + 0 + 733).](img/P7741_H37Rv_Liflandii.png)
+![Genes unique to the set P7741, H37Rv, Liflandii (5169 = 390 + 0 + 3904 + 141 + 1 + 0 + 733). Mycobacterium tuberculosis (var. H37Rv) is clearly, and as expected, relatively distant to the Mycobacterium ulcerans genomes.](img/P7741_H37Rv_Liflandii.png)
 
 ## Bug note
 
