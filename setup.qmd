@@ -239,7 +239,7 @@ else
 fi
 # then symbolic link the latest version to pilon.jar
 echo 'Directory listing: '
-ls -l
+ls -l | perl -nae 'print "@F[0,4..8]\n"'
 cd ..
 
 ```

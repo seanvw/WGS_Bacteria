@@ -463,9 +463,13 @@ conda deactivate
 
 ```
 
-![A sample of genes_presence_absense.csv where number of present = 5 genomes](img/genes_presence_absense_eg.png)
+[![](img/genes_presence_absense_eg.png)](pangenome/gene_presence_absence.csv)
 
-[![Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between \>= 99% similarity). A click on the image gets the scalable SVG version.](img/pangenome_matrix.png){width="5100"}](img/pangenome_matrix.svg)
+Image above: A sample of genes_presence_absense.csv where number of present = 5 genomes. Click on image to get the full CSV file - 11936 lines.
+
+[![](img/pangenome_matrix.png){width="5100"}](img/pangenome_matrix.svg)
+
+-   Image above: Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between \>= 99% similarity). A click on the image gets the scalable SVG version.
 
 ![Pangenome Frequency.](img/pangenome_frequency.png){width="1050"}
 
