@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://seanvw.github.io/WGS_Bacteria/setup.html</loc>
-    <lastmod>2024-02-28T11:07:58.890Z</lastmod>
+    <loc>https://seanvw.github.io/WGS_Bacteria/example_2.html</loc>
+    <lastmod>2024-03-04T10:10:55.468Z</lastmod>
   </url>
   <url>
-    <loc>https://seanvw.github.io/WGS_Bacteria/about.html</loc>
-    <lastmod>2024-02-22T12:16:39.233Z</lastmod>
+    <loc>https://seanvw.github.io/WGS_Bacteria/example_1.html</loc>
+    <lastmod>2024-03-04T10:20:41.187Z</lastmod>
   </url>
   <url>
     <loc>https://seanvw.github.io/WGS_Bacteria/index.html</loc>
     <lastmod>2024-02-29T11:18:07.497Z</lastmod>
   </url>
   <url>
-    <loc>https://seanvw.github.io/WGS_Bacteria/example_1.html</loc>
-    <lastmod>2024-02-29T11:18:05.305Z</lastmod>
+    <loc>https://seanvw.github.io/WGS_Bacteria/about.html</loc>
+    <lastmod>2024-02-22T12:16:39.233Z</lastmod>
+  </url>
+  <url>
+    <loc>https://seanvw.github.io/WGS_Bacteria/setup.html</loc>
+    <lastmod>2024-03-04T10:07:45.755Z</lastmod>
   </url>
 </urlset>

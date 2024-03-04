@@ -134,6 +134,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Example #1</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./example_2.html"> 
+<span class="menu-text">Example #2</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./setup.html"> 
 <span class="menu-text">Set Up</span></a>
   </li>  
@@ -218,7 +222,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastqc</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># mkdir QC_RAW_READS</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># fastqc data/*.fastq.gz -o QC_RAW_READS</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># show the raw data</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> data/ <span class="kw">|</span> <span class="fu">perl</span> <span class="at">-nae</span> <span class="st">'print "@F[4..8]\n"'</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>conda 24.1.2
 # conda environments:
@@ -232,7 +240,11 @@ bacterial-genomics-tutorial-sw5     /Users/sw/anaconda3/envs/bacterial-genomics-
 bacterial-genomics-tutorial-sw7     /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7
 example                  /Users/sw/anaconda3/envs/example
 for_drep                 /Users/sw/anaconda3/envs/for_drep
-just_quast               /Users/sw/anaconda3/envs/just_quast</code></pre>
+just_quast               /Users/sw/anaconda3/envs/just_quast
+
+    
+40M Feb 23 16:02 P7741_R1.fastq.gz
+45M Feb 23 16:02 P7741_R2.fastq.gz</code></pre>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -546,28 +558,28 @@ draft genome sequence extracted</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Alleles
 
-[12:18:48] This is mlst 2.23.0 running on darwin with Perl 5.030003
-[12:18:48] Checking mlst dependencies:
-[12:18:48] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
-[12:18:48] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
-[12:18:48] Found blastn: 2.15.0+ (002015)
-[12:18:48] Excluding 3 schemes: vcholerae_2 abaumannii ecoli
-[12:18:50] Found exact allele match mycobacteria_2.S7-10
-[12:18:50] Found exact allele match mycobacteria_2.L16-450
-[12:18:50] Found exact allele match mycobacteria_2.S12-394
-[12:18:50] Found exact allele match mycobacteria_2.L19-11
-[12:18:50] Found exact allele match mycobacteria_2.S19-13
-[12:18:50] Found exact allele match mycobacteria_2.L35-10
-[12:18:50] Found exact allele match mycobacteria_2.S14Z-10
-[12:18:50] If you like MLST, you're going to absolutely love cgMLST!
-[12:18:50] Done.
+[11:21:54] This is mlst 2.23.0 running on darwin with Perl 5.030003
+[11:21:54] Checking mlst dependencies:
+[11:21:54] Found 'blastn' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/blastn
+[11:21:54] Found 'any2fasta' =&gt; /Users/sw/anaconda3/envs/bacterial-genomics-tutorial-sw7/bin/any2fasta
+[11:21:54] Found blastn: 2.15.0+ (002015)
+[11:21:54] Excluding 3 schemes: ecoli vcholerae_2 abaumannii
+[11:21:56] Found exact allele match mycobacteria_2.S7-10
+[11:21:56] Found exact allele match mycobacteria_2.L16-450
+[11:21:56] Found exact allele match mycobacteria_2.S12-394
+[11:21:56] Found exact allele match mycobacteria_2.L19-11
+[11:21:56] Found exact allele match mycobacteria_2.S19-13
+[11:21:56] Found exact allele match mycobacteria_2.L35-10
+[11:21:56] Found exact allele match mycobacteria_2.S14Z-10
+[11:21:56] Use --quiet or -q to avoid all the message output, including these witticisms.
+[11:21:56] Done.
 
 Antibiotic resistance
 
 Using nucl database ncbi:  5386 sequences -  2023-Nov-4
 Processing: P7741.reordered.fasta
 Found 1 genes in P7741.reordered.fasta
-Tip: the --fofn option allows you to feed in a big list of files to run on.
+Tip: have a suggestion for abricate? Tell me at https://github.com/tseemann/abricate/issues
 Done.
 #FILE   SEQUENCE    START   END STRAND  GENE    COVERAGE    COVERAGE_MAP    GAPS    %COVERAGE   %IDENTITY   DATABASE    ACCESSION   PRODUCT RESISTANCE
 P7741.reordered.fasta   P7741   1110389 1110934 -   aac(2')-Ic  1-546/546   ========/====== 2/2 99.82   82.27   ncbi    NG_047229.1 aminoglycoside N-acetyltransferase AAC(2')-Ic   GENTAMICIN;TOBRAMCYIN</code></pre>
@@ -767,7 +779,7 @@ P7741_00293 &amp; P7741_00294 =&gt; putative protein
 </ul>
 <p><a href="img/My_ulcerans_5g.svg"><img src="img/My_ulcerans_5g.png" class="img-fluid" width="800" alt="Mycobacterium ulcerans: 5 genomes compared - P7741 was assembled in the workflow. Click on image gets the SVG version."></a></p>
 <ul>
-<li>Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version.</li>
+<li>Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis (var. H37Rv). Click on image gets the SVG version.</li>
 </ul>
 <p><a href="img/ulcerans_vs_tuberculosis.svg"><img src="img/ulcerans_vs_tuberculosis.png" class="img-fluid" width="800" alt="Mycobacterium ulcerans liflandii vs Mycobacterium tuberculosis. Click on image gets the SVG version."></a></p>
 </section>
@@ -800,7 +812,6 @@ P7741_00293 &amp; P7741_00294 =&gt; putative protein
 </section>
 <section id="generate-pangenome" class="level3">
 <h3 class="anchored" data-anchor-id="generate-pangenome">Generate Pangenome</h3>
-<p>Roary is a high speed stand alone pangenome pipeline, which takes annotated assemblies in GFF3 format (produced by Prokka (Seemann, 2014)) and calculates the pan genome.</p>
 <p>using</p>
 <ul>
 <li><p>roary and roary_plots.py <a href="https://sanger-pathogens.github.io/Roary/" class="uri">https://sanger-pathogens.github.io/Roary/</a></p>
@@ -877,12 +888,7 @@ Total genes (0% &lt;= strains &lt;= 100%) 11935</code></pre>
 <figcaption>A sample of genes_presence_absense.csv where number of present = 5 genomes</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/pangenome_matrix.png" class="img-fluid figure-img" width="5100"></p>
-<figcaption>Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between &gt;= 99% similarity).</figcaption>
-</figure>
-</div>
+<p><a href="img/pangenome_matrix.svg"><img src="img/pangenome_matrix.png" class="img-fluid" width="5100" alt="Pangenome Tree and Matrix of the Mycobacterium tuberculosis genome versus the Mycobacterium ulcerans genomes. Of the 11935 only 91 are considered core genes across all 6 genomes (a score of between >= 99% similarity). A click on the image gets the scalable SVG version."></a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/pangenome_frequency.png" class="img-fluid figure-img" width="1050"></p>
@@ -892,13 +898,13 @@ Total genes (0% &lt;= strains &lt;= 100%) 11935</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/P7741_Agy99_Liflandii.png" class="img-fluid figure-img"></p>
-<figcaption>Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733). Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144.</figcaption>
+<figcaption>Genes unique to the set P7741, Agy99 and Liflandii (1395 = 390 + 2 + 120 + 141 + 3 + 6 + 733). Within the set, for example Agy99 has 120 unique genes. Of the 1395 unique genes within the set, Agy99 and P7741 share only 5, whilst P7741 and Liflandii share 144. Seems like P7741 and Liflandii are phylogenetically closer than to each other than to Agy99.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/P7741_H37Rv_Liflandii.png" class="img-fluid figure-img"></p>
-<figcaption>Genes unique to the set P7741, H37Rv, Liflandii (5169 = 390 + 0 + 3904 + 141 + 1 + 0 + 733).</figcaption>
+<figcaption>Genes unique to the set P7741, H37Rv, Liflandii (5169 = 390 + 0 + 3904 + 141 + 1 + 0 + 733). Mycobacterium tuberculosis (var. H37Rv) is clearly, and as expected, relatively distant to the Mycobacterium ulcerans genomes.</figcaption>
 </figure>
 </div>
 </section>
